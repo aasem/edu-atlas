@@ -51,7 +51,7 @@ window.READINGS = {
 
   "Zhu Xi on learning and reading": `His advice on reading slowly is permanently true. The tragedy is what the examination system made of it: a method for forming a sage became the syllabus of a test, which is the story of every successful curriculum.`,
 
-  "Wang Yangming, Instructions for Practical Living": `The unity of knowing and acting is the natural sequel to the knowing–acting gap in the Socratic atlas. His defence of children against school as prison is four hundred years ahead of its time.`,
+  "Wang Yangming, Instructions for Practical Living": `The unity of knowing and acting answers the oldest puzzle in moral education, why people who know the good fail to do it, by denying that they know it. His defence of children against school as prison is four hundred years ahead of its time.`,
 
   "Al-Fārābī, The Attainment of Happiness": `The clearest statement anywhere of the two halves of the governing question: taʿlīm and taʾdīb. His elitism is the price of his clarity.`,
 

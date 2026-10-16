@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Noto+Serif+SC&family=Noto+Serif+Devanagari&family=Noto+Serif+Hebrew&display=swap">
 <style>
-/* Layout: a companion codex to the Socratic atlas — a map of learners by tradition, then one column of entries set like folios, each read through the same five questions. */
+/* Layout: a codex — a map of learners by tradition, then one column of entries set like folios, each read through the same five questions. */
 :root{
   --bg:#EAEDF1; --surface:#F6F7F9; --fg:#1D2430; --muted:#5A6474; --rule:#C9D0DA;
   --accent:#2E4A78; --ochre:#97661A; --obj:#8E3B28;
@@ -42,6 +42,7 @@ p{margin:0}
 .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 a{color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a.gl{text-decoration-style:dotted;text-decoration-color:var(--muted)}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 header.hero{padding-block:56px 28px;display:grid;gap:18px}
@@ -55,7 +56,6 @@ header.hero{padding-block:56px 28px;display:grid;gap:18px}
 .toc{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 12.5px var(--mono);padding-block:4px 8px}
 .toc a{text-decoration:none;color:var(--muted)}
 .toc a:hover{color:var(--accent)}
-.sister{font-size:14px;color:var(--muted)}
 
 section{padding-block:28px}
 section>h2{font-size:30px;margin-bottom:6px}
@@ -105,6 +105,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .entry h3{font-size:29px}
 .by{color:var(--muted);font-size:14.5px;margin-top:4px}
 .rd{margin-top:10px;font-size:14.5px;max-width:64ch}
+.rd .ol{display:block;margin-top:4px}
+.rd .ol a{margin-right:14px;white-space:normal}
 .rd b{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-right:6px}
 dl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px 18px;margin:18px 0 0}
 dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:4px}
@@ -167,7 +169,6 @@ dd.tr{font-size:14px;color:var(--muted)}
     </span>
   </h1>
   <p class="lede"><em>What kind of being does education presume the learner to be, and given that being, is education the formation of a person or the transmission of knowledge, toward what end, and on whose authority?</em></p>
-  <p class="sister">A companion to the <a href="https://aasem.github.io/socratic-atlas/" target="_blank" rel="noopener">Socratic Dialogue Atlas</a>, which covers Plato and is not repeated here.</p>
   <nav class="toc" aria-label="Sections"><a href="#question">The Governing Question</a><a href="#map">What the Learner Is</a><a href="#traditions">The Traditions</a><a href="#atlas">The Texts</a><a href="#across">Across the Traditions</a><a href="#words">Key Words</a><a href="#unanswered">What Remains Unanswered</a></nav>
 </header>
 
@@ -216,7 +217,7 @@ dd.tr{font-size:14px;color:var(--muted)}
     <p>These are two models, and neither simply follows the Islamic one. In the medieval period Maimonides, Ibn Rushd and Aquinas share Aristotle and read one another, and the questions of graded teaching and concealment are common to all three. But rabbinic Judaism made study itself a form of worship and argument a form of study. It handed down the Torah through a chain of teachers and paired every student with a companion. It preserved the losing opinion beside the winning one, as Islamic law preserved the disagreements of its schools.</p>
     <p>Christianity added a different problem. For Augustine the learner is fallen and the only true teacher is inward, so the question of the teacher becomes a question about grace. Monastic reading, Hugh of St Victor's restoration of the divine image, and Aquinas's teacher who assists nature as a doctor does are three answers to it. The universities of Paris and Bologna, born around 1200, are the institution that the modern section inherits.</p>
     <h3>Greece and Rome: Habit and the Speaker</h3>
-    <p>Plato is covered in the Socratic atlas. The Greek word for this whole subject, <i>paideia</i>, meant upbringing, culture and education at once. Two lines came out of Athens and still shape Western schooling. The philosophical line ran through Aristotle, for whom virtue is a habit completed by practical wisdom and education the business of the lawgiver. The rhetorical line ran from Isocrates to Quintilian, for whom the educated person is a good man skilled in speaking. The medieval liberal arts combined them, and Montaigne, at the edge of modernity, turned both toward the forming of judgment.</p>
+    <p>The Greek word for this whole subject, <i>paideia</i>, meant upbringing, culture and education at once. Two lines came out of Athens and still shape Western schooling. The philosophical line ran through Aristotle, for whom virtue is a habit completed by practical wisdom and education the business of the lawgiver. The rhetorical line ran from Isocrates to Quintilian, for whom the educated person is a good man skilled in speaking. The medieval liberal arts combined them, and Montaigne, at the edge of modernity, turned both toward the forming of judgment.</p>
     <h3>Modernity: The Order Reversed</h3>
     <p>From Locke onward the learner is pictured either as blank paper or as a rational being who must grow into autonomy. Responsibility for formation passes from churches and households to the state, which begins to require schooling: Prussia's general school regulations of 1763 are an early landmark. The university justifies itself first by Humboldt's story of self-formation and then by the story of a people's emancipation. Weber expels formation from the lecture hall, and Lyotard reports that both stories have lost their hold and that knowledge is now judged by its performance.</p>
     <p>For the colonized world modernity arrived as Macaulay's Minute: an education designed for the needs of an empire, with a person assumed to fit them. In South Asia it produced the lasting split between madrasa and school that Sir Syed, Iqbal and Fazlur Rahman tried in different ways to heal. In its sharpest form the reversal is the doctrine of human capital, in which the economy sets the purpose of education and the learner is valued by his expected return. The responses that follow fall into three groups. Newman, al-Attas and MacIntyre return to formation within a tradition. Freire, Illich and Rancière seek emancipation from the teacher and the school. Arendt defends the teacher's authority as responsibility for an old world handed to newcomers. Ngũgĩ adds that all of this happens in a language, and asks whose.</p>
@@ -225,7 +226,7 @@ dd.tr{font-size:14px;color:var(--muted)}
 
 <section id="atlas" style="padding-bottom:0">
   <h2>The Texts, One by One</h2>
-  <p class="sub">Each entry gives the passages to read, a translation to look for, and the five questions. The coloured line marks the person; the strongest objection is set in red. Passage numbers follow the translation named, and some numbering differs between editions.</p>
+  <p class="sub">Each entry gives the passages to read, a free text online where one exists, a translation to look for, and the five questions. The coloured line marks the person; the strongest objection is set in red. Passage numbers follow the translation named, and some numbering differs between editions.</p>
 </section>
 
 <div class="filters" role="group" aria-label="Filter texts">
@@ -284,7 +285,7 @@ dd.tr{font-size:14px;color:var(--muted)}
 const E=[];
 // India and China
 E.push(
-{n:"Mundaka Upanishad",by:"Vedic sages; teaching attributed to Aṅgiras",t:"india",d:"late Vedic, c. 5th c. BCE or later",era:"Ancient",l:"veiled",f:"f",wk:"Mundaka_Upanishad",
+{n:"Mundaka Upanishad",ol:[["Max Müller translation (Sacred Books of the East 15)", "https://sacred-texts.com/hin/sbe15/"]],by:"Vedic sages; teaching attributed to Aṅgiras",t:"india",d:"late Vedic, c. 5th c. BCE or later",era:"Ancient",l:"veiled",f:"f",wk:"Mundaka_Upanishad",
 read:"1.1.3–5 (the two knowledges); 1.2.12–13 (approaching the teacher); 3.2.3",
 tr:"Patrick Olivelle, <i>Upaniṣads</i> (Oxford World's Classics, 1996)",
 w:"A householder, Śaunaka, approaches the sage Aṅgiras with the question every later Indian theory of learning inherits: what is that by knowing which all this becomes known? Aṅgiras answers by dividing knowledge in two before he says anything about its content.",
@@ -294,7 +295,7 @@ x:"The Upanishad sets the higher knowledge (<i>parā vidyā</i>), by which the i
 k:"The seeker must go ‘fuel in hand’, the gesture of a pupil asking to be accepted, to a teacher who is both learned in scripture (<i>śrotriya</i>) and established in brahman (<i>brahmaniṣṭha</i>). Learning without realization does not qualify; neither does realization without learning. Yet 3.2.3 adds that the self is not won by instruction, intellect or much hearing.",
 o:"The Mīmāṃsā school, which held that the Veda is about ritual action and that knowledge for its own sake has no purpose, would call the classification upside down. The deeper difficulty is internal: if the self cannot be reached by instruction, what exactly does the qualified teacher do?"},
 
-{n:"Chandogya Upanishad VI",by:"Uddālaka Āruṇi to his son Śvetaketu",t:"india",d:"c. 7th–6th c. BCE",era:"Ancient",l:"veiled",f:"f",wk:"Chandogya_Upanishad",
+{n:"Chandogya Upanishad VI",ol:[["Max Müller translation (Sacred Books of the East 1)", "https://sacred-texts.com/hin/sbe01/"]],by:"Uddālaka Āruṇi to his son Śvetaketu",t:"india",d:"c. 7th–6th c. BCE",era:"Ancient",l:"veiled",f:"f",wk:"Chandogya_Upanishad",
 read:"VI.1 (the return of Śvetaketu); VI.7 (the fast); VI.12–13 (the seed and the salt)",
 tr:"Patrick Olivelle, <i>Upaniṣads</i> (1996)",
 w:"Śvetaketu is sent away at twelve because no one in the family is to be a brahmin by birth alone. He returns at twenty-four having studied all the Vedas, conceited and sure of his learning. His father asks whether he learned the teaching by which the unheard becomes heard and the unknown known. He has not, and the education begins again at home.",
@@ -304,7 +305,7 @@ x:"Not doctrine but a series of demonstrations the son performs himself: break t
 k:"The father, and specifically one who has realized what he teaches. Twelve years of formal study produced pride. The dialogue is the classic portrait of the learned man who is not educated.",
 o:"Buddhist critics deny the essence altogether: there is no abiding self to recognize, only processes (see the entry on the Buddha's discourses). And a modern reader may ask whether twelve years of memorization were wasted or were the necessary ground for the father's few demonstrations."},
 
-{n:"Taittiriya Upanishad 1.11",by:"The Vedic teacher's charge to departing pupils",t:"india",d:"c. 6th c. BCE",era:"Ancient",l:"unformed",f:"b",wk:"Taittiriya_Upanishad",
+{n:"Taittiriya Upanishad 1.11",ol:[["Max Müller translation (Sacred Books of the East 15)", "https://sacred-texts.com/hin/sbe15/"]],by:"The Vedic teacher's charge to departing pupils",t:"india",d:"c. 6th c. BCE",era:"Ancient",l:"unformed",f:"b",wk:"Taittiriya_Upanishad",
 read:"1.11 (the whole charge, a single page); 1.2 on phonetics as the first discipline",
 tr:"Patrick Olivelle, <i>Upaniṣads</i> (1996)",
 w:"The first section of this Upanishad is called the Śikṣā Vallī, from <i>śikṣā</i>, phonetics and by extension instruction. Its eleventh chapter records what the teacher says when the pupil leaves after completing Vedic study. It is the earliest convocation address we have.",
@@ -314,7 +315,7 @@ x:"The Veda, recited and kept, and a way of conducting oneself. The charge is ca
 k:"The teacher's authority is real and limited in the same sentence. The pupil is to follow only the teacher's blameless acts and good conduct, ‘not others’. When in doubt, he is to do as judicious and gentle brahmins devoted to dharma would do. Authority belongs to good conduct, and the teacher has it only so far as he embodies it.",
 o:"The household ethic presumes a fixed social order, and a reader from the renunciant traditions, Buddhist or Upanishadic, would say it trains a good householder and leaves the question of liberation untouched."},
 
-{n:"Katha Upanishad",by:"The dialogue of Naciketas and Yama",t:"india",d:"c. 5th c. BCE",era:"Ancient",l:"veiled",f:"f",wk:"Katha_Upanishad",
+{n:"Katha Upanishad",ol:[["Max Müller translation (Sacred Books of the East 15)", "https://sacred-texts.com/hin/sbe15/"]],by:"The dialogue of Naciketas and Yama",t:"india",d:"c. 5th c. BCE",era:"Ancient",l:"veiled",f:"f",wk:"Katha_Upanishad",
 read:"1.1 (the story); 1.2.1–9 and 1.2.23 (the good, the pleasant, and the limits of instruction); 1.3.3–14 (the chariot)",
 tr:"Patrick Olivelle, <i>Upaniṣads</i> (1996)",
 w:"A boy watches his father give away worn-out cows at a sacrifice and asks to whom he himself will be given. ‘To Death,’ says the father in anger. Naciketas waits three nights at Yama's house unfed and is granted three wishes. For the third he asks what happens after death, and refuses every offer of wealth and long life made to deflect him.",
@@ -324,7 +325,7 @@ x:"Knowledge of the self, which ‘is not to be attained by reasoning’ (<i>tar
 k:"Two claims sit side by side. Without a qualified teacher there is no way in, and taught by a lesser man it is not grasped. Yet the self is not attained by instruction or much learning; it is attained by the one whom it chooses (1.2.23). The teacher is necessary and not sufficient. The pupil's qualification is tested first: Yama's temptations are an entrance examination.",
 o:"The Nyāya logicians, who made reasoning the instrument of liberation, would resist the demotion of <i>tarka</i>. And the teacher here is Death himself, which raises the question whether any living teacher can stand in that role."},
 
-{n:"Bhagavad Gita",by:"Krishna to Arjuna, in the Mahābhārata",t:"india",d:"c. 2nd c. BCE – 2nd c. CE",era:"Ancient",l:"bound",f:"b",wk:"Bhagavad_Gita",
+{n:"Bhagavad Gita",ol:[["Edwin Arnold translation", "https://sacred-texts.com/hin/gita/"]],by:"Krishna to Arjuna, in the Mahābhārata",t:"india",d:"c. 2nd c. BCE – 2nd c. CE",era:"Ancient",l:"bound",f:"b",wk:"Bhagavad_Gita",
 read:"Ch. 2 (2.7 Arjuna asks to be taught; 2.47); 4.3 and 4.34 (friendship, and how to learn); 18.63 and 18.73 (the release)",
 tr:"Laurie Patton (Penguin, 2008) or Barbara Stoler Miller (1986)",
 w:"Teaching begins in a crisis of action. Arjuna sees his teachers and kinsmen in the opposing army, drops his bow, and says that his nature is overcome; he is Krishna's pupil and asks to be told plainly what is better. Seventeen chapters follow on the battlefield.",
@@ -342,9 +343,9 @@ p:"A being whose suffering rests on a chain: pain depends on birth, birth on act
 e:"Liberation (<i>apavarga</i>) through right knowledge reached by valid means of knowing (<i>pramāṇas</i>).",
 x:"A method: the means of knowledge, the five-membered argument, and the discipline of honest debate.",
 k:"Honest discussion (<i>vāda</i>) aims at truth and is conducted with teachers, pupils and fellow students free of envy. Disputation to win (<i>jalpa</i>) admits quibbles and trick rejoinders. Destructive cavilling (<i>vitaṇḍā</i>) attacks without defending any thesis. The sūtras allow the last two only to protect a truth already reached, ‘as a fence of thorns protects growing seeds’ (4.2.50).",
-o:"The Mādhyamika Buddhist Nāgārjuna used something like <i>vitaṇḍā</i> as his whole method, refuting every position without holding one, and claimed that this, not system-building, is liberating. It is the Indian form of the question the Socratic atlas asks."},
+o:"The Mādhyamika Buddhist Nāgārjuna used something like <i>vitaṇḍā</i> as his whole method, refuting every position without holding one, and claimed that this, not system-building, is liberating. The dispute is over whether refutation without a thesis of one's own can be a path to truth."},
 
-{n:"The Buddha's discourses",by:"Kālāma Sutta (AN 3.65) and Alagaddūpama Sutta (MN 22)",t:"india",d:"Pali canon, oral c. 5th–4th c. BCE",era:"Ancient",l:"bound",f:"f",wk:"Kalama_Sutta",
+{n:"The Buddha's discourses",ol:[["Kālāma Sutta", "https://www.accesstoinsight.org/tipitaka/an/an03/an03.065.than.html"], ["Alagaddūpama Sutta", "https://www.accesstoinsight.org/tipitaka/mn/mn.022.than.html"]],by:"Kālāma Sutta (AN 3.65) and Alagaddūpama Sutta (MN 22)",t:"india",d:"Pali canon, oral c. 5th–4th c. BCE",era:"Ancient",l:"bound",f:"f",wk:"Kalama_Sutta",
 read:"AN 3.65 (the Kālāmas); MN 22 (the water snake and the raft); SN 45.2 (good friendship)",
 tr:"Bhikkhu Bodhi, <i>In the Buddha's Words</i> (2005), which includes all three",
 w:"The Kālāmas are confused by wandering teachers who each praise their own doctrine and disparage the rest. The Buddha tells them not to go by report, tradition, scripture, logic, inference, the apparent competence of a speaker, or the thought that a monk is their teacher, but to know for themselves what leads to harm. In MN 22 a monk named Ariṭṭha has misunderstood the teaching, and the Buddha gives two similes about how a teaching can be mishandled.",
@@ -354,7 +355,7 @@ x:"A practice and a way of seeing, validated in one's own experience. The teachi
 k:"The teacher is a ‘good friend’ (<i>kalyāṇamitta</i>). When Ānanda suggests good friendship is half of the holy life, the Buddha corrects him: it is the whole of it (SN 45.2). The water-snake simile warns that those who learn the teaching in order to criticize others and win debates grasp it by the tail and are bitten.",
 o:"The Kālāma Sutta is often read as a charter for free inquiry. Bhikkhu Bodhi and others point out that it addresses people with no faith yet, and that the Buddha then leads them by questions to his own conclusions; the path afterwards requires confidence (<i>saddhā</i>) in the teacher. The tension between testing for oneself and trusting the guide is not resolved, only staged."},
 
-{n:"Lotus Sutra, the burning house",by:"Mahāyāna sūtra",t:"india",d:"c. 1st–2nd c. CE; Chinese translation by Kumārajīva, 406",era:"Ancient",l:"bound",f:"t",wk:"Lotus_Sutra",
+{n:"Lotus Sutra, the burning house",ol:[["H. Kern translation", "https://sacred-texts.com/bud/lotus/"]],by:"Mahāyāna sūtra",t:"india",d:"c. 1st–2nd c. CE; Chinese translation by Kumārajīva, 406",era:"Ancient",l:"bound",f:"t",wk:"Lotus_Sutra",
 read:"Ch. 2 (‘Expedient Means’); ch. 3 (‘Simile and Parable’)",
 tr:"Burton Watson, <i>The Lotus Sutra</i> (1993)",
 w:"A rich man's house catches fire while his children play inside, absorbed and unafraid. They do not understand his warnings. He calls out that goat-carts, deer-carts and ox-carts are waiting at the gate. They run out, and he gives each of them something better than anything promised: a great carriage drawn by white oxen. Śāriputra is asked whether the father lied. No, he says, because the children were saved.",
@@ -374,7 +375,7 @@ x:"The meaning of scriptural sentences such as ‘that you are’, repeated and 
 k:"The pupil must be qualified: calm, self-controlled, detached, having approached properly. The teacher must be able to argue for and against, have memory and tranquillity, be learned in scripture, established in brahman, and free of pride and deceit, with no aim but helping others. He teaches ‘until the pupil firmly grasps it’.",
 o:"Access is restricted in the very tradition that teaches universal identity: in his commentary on the <i>Brahma Sūtra</i> (1.3.34–38) Śaṅkara holds that śūdras may not study the Veda. Rāmānuja objects on another ground, that knowledge without devotion (<i>bhakti</i>) does not liberate."},
 
-{n:"Analects",by:"Confucius (Kongzi) and disciples",t:"china",d:"compiled c. 5th–3rd c. BCE",era:"Ancient",l:"unformed",f:"b",wk:"Analects",
+{n:"Analects",ol:[["Chinese with Legge's English", "https://ctext.org/analects"]],by:"Confucius (Kongzi) and disciples",t:"china",d:"compiled c. 5th–3rd c. BCE",era:"Ancient",l:"unformed",f:"b",wk:"Analects",
 read:"1.1; 2.4; 2.11; 2.15; 7.1; 7.8; 11.22; 15.39; 17.2–3",
 tr:"Edward Slingerland, <i>Confucius: Analects</i> (2003), with traditional commentary",
 w:"Short sayings and exchanges between a teacher and his followers, the founding text of the tradition that most explicitly makes learning (<i>xue</i>) the centre of human life. It opens with the pleasure of learning and practising what one has learned (1.1).",
@@ -384,7 +385,7 @@ x:"The culture of the Zhou: texts, rites, music and conduct. Confucius claims to
 k:"Confucius refuses no one who comes with a small gift, and in teaching there are no categories of person (15.39). But he does not open the way for one who is not eager, and if he lifts one corner and the student cannot return with the other three, he does not repeat himself (7.8). In 11.22 two students ask whether to act at once on what they hear and get opposite answers, because one is too bold and the other too timid.",
 o:"The Mohists charged Confucians with living off elaborate rituals that wasted resources and with a graded love that put family before justice. The Daoists, especially Zhuangzi, mocked the whole idea that virtue could be taught by rites and texts."},
 
-{n:"Mencius",by:"Mencius (Mengzi)",t:"china",d:"4th c. BCE",era:"Ancient",l:"natural",f:"f",wk:"Mencius_(book)",
+{n:"Mencius",ol:[["Chinese with Legge's English", "https://ctext.org/mengzi"]],by:"Mencius (Mengzi)",t:"china",d:"4th c. BCE",era:"Ancient",l:"natural",f:"f",wk:"Mencius_(book)",
 read:"2A2 (the farmer of Song); 2A6 (the four sprouts); 4A18 (fathers should not teach sons); 6A1–8 (against Gaozi; Ox Mountain); 7A15; 7B3",
 tr:"Bryan Van Norden, <i>Mengzi</i> (2008), or D. C. Lau (1970)",
 w:"Conversations with kings, disciples and opponents, organized around one thesis: human nature is good. The proof is a thought experiment. Anyone who suddenly sees a child about to fall into a well feels alarm and compassion, not to win favour or reputation but immediately (2A6).",
@@ -404,7 +405,7 @@ x:"Ritual (<i>li</i>) above all, then the classics. Learning begins with recitin
 k:"Absolutely necessary. In learning nothing is quicker than drawing close to the right person. Ritual corrects the self, and the teacher corrects one's understanding of ritual; without a teacher, how would one know the ritual is right? (ch. 2). The teacher's authority stands above the pupil's own judgment.",
 o:"If human nature is bad, where did the sages who created ritual get their goodness? Xunzi answers that they made ritual as a potter makes a pot, by effort, not by nature. Critics have found this circular. History adds a footnote: his two most famous students, Han Fei and Li Si, became architects of Legalism, and Li Si as chancellor of Qin oversaw the burning of books in 213 BCE."},
 
-{n:"Xueji (Record of Learning)",by:"Chapter 18 of the <i>Book of Rites</i> (Liji)",t:"china",d:"Warring States, compiled in the Han, c. 3rd–1st c. BCE",era:"Ancient",l:"unformed",f:"b",wk:"Book_of_Rites",
+{n:"Xueji (Record of Learning)",ol:[["Legge's English", "https://ctext.org/liji/xue-ji/ens"]],by:"Chapter 18 of the <i>Book of Rites</i> (Liji)",t:"china",d:"Warring States, compiled in the Han, c. 3rd–1st c. BCE",era:"Ancient",l:"unformed",f:"b",wk:"Book_of_Rites",
 read:"The whole chapter, about five pages",
 tr:"James Legge, <i>The Li Ki</i> (Sacred Books of the East 28, 1885), free online",
 w:"Possibly the oldest text anywhere devoted entirely to teaching. It describes a graded system of schools from household to state, a calendar of examinations, and a precise psychology of the classroom.",
@@ -414,7 +415,7 @@ x:"Texts and a growing capacity: in the first year parsing sentences and setting
 k:"Teaching and learning advance each other: one learns and then knows one's deficiency, teaches and then knows the difficulty. The good teacher guides but does not drag, urges but does not suppress, opens the way but does not take the student to the end. A good questioner works like a man cutting hard wood, easy parts first. A good answerer is like a bell: strike lightly and it sounds lightly. The chapter blames teachers who merely recite, pile on questions and push ahead regardless of the student, so that students come to hate learning and resent their teachers.",
 o:"It assumes the state's interest in schooling and a stable hierarchy in which the teacher's honour supports the ruler's. The Daoist would reply that the most important thing in the jade was never put there by the carver."},
 
-{n:"Daodejing",by:"Attributed to Laozi",t:"china",d:"c. 4th c. BCE",era:"Ancient",l:"natural",f:"f",wk:"Tao_Te_Ching",
+{n:"Daodejing",ol:[["Chinese with Legge's English", "https://ctext.org/dao-de-jing"]],by:"Attributed to Laozi",t:"china",d:"c. 4th c. BCE",era:"Ancient",l:"natural",f:"f",wk:"Tao_Te_Ching",
 read:"Chs. 2, 3, 19–20, 27, 28, 48, 65",
 tr:"D. C. Lau (Penguin, 1963) or P. J. Ivanhoe (2002)",
 w:"Eighty-one short chapters of verse and aphorism, many addressed to a ruler. Several speak directly against learning as the Confucians understood it.",
@@ -424,7 +425,7 @@ x:"Almost nothing that can be stated. In pursuing learning one gains something e
 k:"The sage teaches by example and by withholding. The good person is the teacher of the one who is not good, and the one who is not good is the good person's material (ch. 27).",
 o:"Chapters 3 and 65 say that the sage keeps the people without knowledge and desire, and that the ancients did not use the Way to enlighten the people but to keep them simple. Read politically, this is a programme for keeping subjects ignorant, and the Legalist Han Fei wrote commentary on Laozi for just that use."},
 
-{n:"Zhuangzi",by:"Zhuang Zhou and later hands",t:"china",d:"4th–3rd c. BCE",era:"Ancient",l:"natural",f:"f",wk:"Zhuangzi_(book)",
+{n:"Zhuangzi",ol:[["Chinese with Legge's English", "https://ctext.org/zhuangzi"]],by:"Zhuang Zhou and later hands",t:"china",d:"4th–3rd c. BCE",era:"Ancient",l:"natural",f:"f",wk:"Zhuangzi_(book)",
 read:"Ch. 3 (Cook Ding); ch. 6 (sitting and forgetting); ch. 13 (Wheelwright Bian); ch. 17 (the frog in the well); ch. 26 (the fish trap)",
 tr:"Brook Ziporyn, <i>Zhuangzi: The Complete Writings</i> (2020), or Burton Watson (1968)",
 w:"The great skeptic of transmission. Duke Huan is reading in his hall when Wheelwright Bian asks what the book contains. The words of the sages. Are the sages alive? Dead. Then you are reading their dregs. Bian explains: in cutting a wheel, too slow and the chisel slips, too fast and it sticks; the knack is in the hand responding to the heart, and he cannot put it into words or teach it to his son, so at seventy he is still making wheels (ch. 13).",
@@ -496,7 +497,7 @@ x:"Sciences are divided into the individually obligatory (<i>farḍ ʿayn</i>), 
 k:"The teacher should be compassionate toward students as a father to his sons, teach without seeking payment or thanks, correct by hints rather than open rebuke, not belittle other sciences, speak to each according to his understanding, and act on what he teaches. The student should purify himself first, reduce worldly ties, and avoid controversies at the start. The letter adds that the seeker needs a shaykh who trains him as a farmer pulls weeds.",
 o:"Historians once blamed his ranking of the sciences for the later narrowing of madrasa curricula; that thesis is now widely contested, but the question of what his classification licensed remains. Ibn Khaldūn's naturalism offers a quieter alternative."},
 
-{n:"Ibn Ṭufayl, Ḥayy ibn Yaqẓān",by:"Abū Bakr ibn Ṭufayl",t:"islam",d:"c. 1105–1185",era:"Medieval",l:"unformed",f:"f",wk:"Hayy_ibn_Yaqdhan",
+{n:"Ibn Ṭufayl, Ḥayy ibn Yaqẓān",ol:[["Simon Ockley translation (Project Gutenberg)", "https://www.gutenberg.org/ebooks/16831"]],by:"Abū Bakr ibn Ṭufayl",t:"islam",d:"c. 1105–1185",era:"Medieval",l:"unformed",f:"f",wk:"Hayy_ibn_Yaqdhan",
 read:"The whole tale (short); especially the gazelle's death, the discovery of the Necessary Being, and the visit to Salāmān's island",
 tr:"Lenn Evan Goodman, <i>Ibn Tufayl's Hayy ibn Yaqzan</i> (1972; updated 2009)",
 w:"A boy grows up alone on an island, nursed by a gazelle. When she dies he dissects her heart looking for what has left her, and from there, by observation and reflection alone, he reaches knowledge of the soul, the heavens, the Necessary Being, and finally a mystical union, by about the age of fifty. Then a man named Absāl arrives, teaches him language, and finds that Hayy's truths are the truths of his own religion. They go to the neighbouring island to teach its people.",
@@ -506,7 +507,7 @@ x:"Nothing, at first. Hayy has no language and no teacher. On Salāmān's island
 k:"For the rare nature, none is needed. For everyone else, the Prophet's law. The book is the great thought experiment on whether education requires a teacher at all. It reached Europe in Edward Pococke's Latin translation of 1671 as <i>Philosophus Autodidactus</i>.",
 o:"In the 13th century Ibn al-Nafīs wrote a counter-tale, <i>Theologus Autodidactus</i>, in which the solitary reasoner deduces the necessity of prophecy and law. A modern objection follows the Great Speech of the <i>Protagoras</i>: thought develops in a language learned from others, so Hayy's silent progress is the one thing the story cannot have."},
 
-{n:"Ibn Rushd, The Decisive Treatise",by:"Abū al-Walīd ibn Rushd (Averroes)",t:"islam",d:"c. 1179",era:"Medieval",l:"unformed",f:"t",wk:"Fasl_al-Maqal",
+{n:"Ibn Rushd, The Decisive Treatise",ol:[["Jamil-ur-Rehman translation, in The Philosophy and Theology of Averroes (Project Gutenberg)", "https://www.gutenberg.org/ebooks/65708"]],by:"Abū al-Walīd ibn Rushd (Averroes)",t:"islam",d:"c. 1179",era:"Medieval",l:"unformed",f:"t",wk:"Fasl_al-Maqal",
 read:"<i>Faṣl al-Maqāl</i>, the whole (about 30 pages)",
 tr:"Charles E. Butterworth, <i>Decisive Treatise</i> (2001)",
 w:"A legal opinion in form. Is the study of philosophy and logic permitted, forbidden or commanded by the Law? Ibn Rushd answers that for those capable of it, it is obligatory, since the Qur'an commands reflection on existing things, and truth does not contradict truth.",
@@ -536,7 +537,7 @@ x:"A <i>malaka</i>, a settled habit or working command of a science, very like A
 k:"A master of the science, met in person. Habits acquired through direct contact are firmer, and meeting several teachers lets a student separate a science from one teacher's terminology, which is why travel completes education. Severity toward students destroys their spirit and makes them deceitful and lazy.",
 o:"Defenders of the Maghribi practice of teaching the Qur'an alone before anything else, which Ibn Khaldūn reports, argued that it protected the Book and the identity of the young. He himself thought another plan better but accepted that custom would not allow it."},
 
-{n:"Pirkei Avot and the house of study",by:"The Mishnah's ‘Chapters of the Fathers’, with Talmudic passages",t:"abr",d:"compiled c. 200 CE; Talmud c. 500 CE",era:"Ancient",l:"wayward",f:"b",wk:"Pirkei_Avot",
+{n:"Pirkei Avot and the house of study",ol:[["Pirkei Avot with English (Sefaria)", "https://www.sefaria.org/Pirkei_Avot.1"]],by:"The Mishnah's ‘Chapters of the Fathers’, with Talmudic passages",t:"abr",d:"compiled c. 200 CE; Talmud c. 500 CE",era:"Ancient",l:"wayward",f:"b",wk:"Pirkei_Avot",
 read:"Avot 1.1, 1.6, 1.17, 2.5, 3.17, 4.1, 5.15; Mishnah Eduyot 1.5; Talmud Taʿanit 7a, Eruvin 13b, Ḥagigah 15b",
 tr:"Any edition of Pirkei Avot; the Talmud passages are online at Sefaria in English",
 w:"Avot opens with a chain: Moses received the Torah at Sinai and handed it to Joshua, Joshua to the elders, the elders to the prophets, the prophets to the men of the Great Assembly, who said: raise up many disciples. The rabbinic tradition then built a culture in which argument itself is study, and the losing opinion is preserved beside the winning one.",
@@ -546,7 +547,7 @@ x:"Text and argument together. The Mishnah records minority opinions so that a l
 k:"Make yourself a teacher and acquire a companion (1.6). Learning happens in pairs (<i>ḥavruta</i>): as iron sharpens iron, two scholars sharpen each other, and one rabbi says he learned much from his teachers, more from his colleagues, and most from his students (Taʿanit 7a). The bashful cannot learn and the impatient cannot teach (2.5). Students are a sponge, a funnel, a strainer or a sieve (5.15).",
 o:"The tradition contains its own hardest case. Elisha ben Abuya became an apostate, called simply ‘the Other’, and Rabbi Meir kept learning from him; Meir, the Talmud says, found a pomegranate, ate the fruit and threw away the peel (Ḥagigah 15b). Can teaching be separated from the teacher's life? Avot itself suggests not."},
 
-{n:"Augustine, The Teacher",by:"Augustine of Hippo",t:"abr",d:"389 CE",era:"Ancient",l:"veiled",f:"f",wk:"De_Magistro",
+{n:"Augustine, The Teacher",ol:[["The Teacher, 1924 translation (Princeton Theological Seminary)", "https://commons.ptsem.edu/id/philosophyofteac00augu"], ["Confessions, Book I (New Advent)", "https://www.newadvent.org/fathers/110101.htm"]],by:"Augustine of Hippo",t:"abr",d:"389 CE",era:"Ancient",l:"veiled",f:"f",wk:"De_Magistro",
 read:"<i>De Magistro</i>, esp. chs. 10–14; <i>Confessions</i> I.9–19 on his own schooling",
 tr:"Peter King, <i>Against the Academicians and The Teacher</i> (1995)",
 w:"A dialogue between Augustine and his son Adeodatus, then about sixteen, who died soon after. It starts with the question of what we do when we speak and ends with one of the most radical theses in the history of education: no human being teaches another anything.",
@@ -566,7 +567,7 @@ x:"All the arts in their order, read slowly and committed to memory. Learn every
 k:"A teacher and books, received with humility, which is the beginning of discipline. The student should despise no knowledge and no writing, should not be ashamed to learn from anyone, and should not look down on others once learned. The student needs three things: natural aptitude, exercise and discipline. One passage defines the end of the learner's path as exile: the person to whom his homeland is sweet is a beginner; the one to whom every soil is native is strong; the one to whom the whole world is foreign is perfect (III.19).",
 o:"A modern objection asks what happens to this patient, memory-centred reading when knowledge expands beyond what anyone can learn ‘in order’. Illich's answer was that the change was not progress but a different kind of mind."},
 
-{n:"Maimonides, Guide of the Perplexed",by:"Moses Maimonides",t:"abr",d:"c. 1190",era:"Medieval",l:"unformed",f:"b",wk:"The_Guide_for_the_Perplexed",
+{n:"Maimonides, Guide of the Perplexed",ol:[["M. Friedländer translation", "https://sacred-texts.com/jud/gfp/"]],by:"Moses Maimonides",t:"abr",d:"c. 1190",era:"Medieval",l:"unformed",f:"b",wk:"The_Guide_for_the_Perplexed",
 read:"The Introduction to Part I; I.1 (image); I.31–35 (why metaphysics cannot be taught first, and what must be taught to everyone); III.54",
 tr:"Shlomo Pines, <i>The Guide of the Perplexed</i> (1963)",
 w:"Written for a student, Joseph ben Judah, torn between the Law and philosophy. The introduction explains that the book is deliberately obscure: the secrets of the Law may be taught only in chapter headings, to someone wise who can understand by himself, and truths flash and are hidden again like lightning. One of seven causes of contradiction in books, he says, is that very obscure matters require concealing some things and disclosing others.",
@@ -576,7 +577,7 @@ x:"Different things to different people. Metaphysics cannot come first, because 
 k:"The Law and its tradition for all; the philosopher-rabbi, writing in deliberate concealment, for the few.",
 o:"The Maimonidean controversy of the 1230s, in which his philosophical works were denounced and by some accounts burned. Earlier, Judah Halevi's <i>Kuzari</i> had argued that the God of the philosophers is not the God of Abraham, and that a people's living tradition carries what demonstration cannot."},
 
-{n:"Aquinas, On the Teacher",by:"Thomas Aquinas",t:"abr",d:"1256–59",era:"Medieval",l:"unformed",f:"t",wk:"Thomas_Aquinas",
+{n:"Aquinas, On the Teacher",ol:[["Question 11, McGlynn translation", "https://isidore.co/aquinas/english/QDdeVer11.htm"]],by:"Thomas Aquinas",t:"abr",d:"1256–59",era:"Medieval",l:"unformed",f:"t",wk:"Thomas_Aquinas",
 read:"<i>Disputed Questions on Truth</i>, q. 11, art. 1 (and arts. 2–4)",
 tr:"James V. McGlynn, <i>Truth</i>, vol. 2 (1953)",
 w:"Taking Augustine's title, Aquinas asks whether one human being can teach another and be called a teacher, or only God can. He answers yes, and his answer is the classical defence of teaching as a real cause.",
@@ -586,17 +587,17 @@ x:"Knowledge can arise in two ways, as health can. By nature alone, through one'
 k:"The teacher must know explicitly and perfectly what the learner knows only potentially. God teaches inwardly by giving the light of reason, and the human teacher outwardly. Teaching, he concludes in art. 4, belongs to the active life.",
 o:"Augustine, whom he is answering, and Bonaventure, who kept a stronger doctrine of divine illumination. A modern objection asks whether the doctor model gives the learner too passive a role."},
 
-{n:"Aristotle on habit and practical wisdom",by:"Aristotle",t:"west",d:"4th c. BCE",era:"Ancient",l:"unformed",f:"f",wk:"Nicomachean_Ethics",
+{n:"Aristotle on habit and practical wisdom",ol:[["Nicomachean Ethics, W. D. Ross", "http://classics.mit.edu/Aristotle/nicomachaen.html"], ["Politics, Benjamin Jowett", "http://classics.mit.edu/Aristotle/politics.html"]],by:"Aristotle",t:"west",d:"4th c. BCE",era:"Ancient",l:"unformed",f:"f",wk:"Nicomachean_Ethics",
 read:"<i>Nicomachean Ethics</i> I.3, II.1–4, VI.5–8, X.9; <i>Politics</i> VIII.1–3",
 tr:"Terence Irwin, <i>Nicomachean Ethics</i> (3rd ed., 2019); C. D. C. Reeve, <i>Politics</i> (1998)",
-w:"Aristotle's ethics is a treatise on how good people come to be, and his <i>Politics</i> ends with an unfinished book on public education. He is the bridge from the <i>Statesman</i> of the Socratic atlas to most later accounts of formation, Islamic, Jewish and Christian.",
+w:"Aristotle's ethics is a treatise on how good people come to be, and his <i>Politics</i> ends with an unfinished book on public education. He is the bridge from Plato's <i>Republic</i> and <i>Laws</i> to most later accounts of formation, Islamic, Jewish and Christian.",
 p:"A rational and political animal. Virtues arise in us neither by nature nor against nature: we are naturally able to receive them, and are completed by habit (II.1). Intellectual virtue comes mainly from teaching, moral virtue from habit.",
 e:"Happiness (<i>eudaimonia</i>), activity of the soul in accordance with virtue; and a city whose citizens can use leisure well.",
 x:"Habits first: we become just by doing just acts. Then practical wisdom (<i>phronesis</i>), which concerns particulars and comes from experience, which is why the young can be mathematicians but not wise (VI.8). Argument alone cannot make the many good; they need good upbringing under good laws (X.9).",
 k:"Parents and, above all, the lawgiver. Education should be public and the same for all citizens (<i>Politics</i> VIII.1). Aristotle notes that people disagree about what to teach: the useful, what leads to virtue, or higher knowledge.",
 o:"‘All citizens’ excluded women, slaves and manual workers; Aristotle defended natural slavery in <i>Politics</i> I. Kant's objection is of another kind: virtue formed by habit before reason can judge it is heteronomous, good conduct not yet chosen."},
 
-{n:"Quintilian, The Orator's Education",by:"Marcus Fabius Quintilianus",t:"west",d:"c. 95 CE",era:"Ancient",l:"unformed",f:"b",wk:"Institutio_Oratoria",
+{n:"Quintilian, The Orator's Education",ol:[["Latin and English (LacusCurtius)", "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Quintilian/Institutio_Oratoria/home.html"]],by:"Marcus Fabius Quintilianus",t:"west",d:"c. 95 CE",era:"Ancient",l:"unformed",f:"b",wk:"Institutio_Oratoria",
 read:"<i>Institutio Oratoria</i> I.1–3 (early education, school versus home, against flogging); XII.1 (the good man)",
 tr:"Donald A. Russell, Loeb Classical Library (2001)",
 w:"The fullest ancient programme of education from the cradle, written by Rome's first salaried professor of rhetoric. It became, after its rediscovery in 1416, a founding text of Renaissance humanist schooling.",
@@ -606,7 +607,7 @@ x:"Language, literature and rhetoric, but with character as the point, since no 
 k:"The school is better than private tutoring, because a child learns from rivals and companions as well as the master (I.2). Flogging is disgraceful, fit only for slaves, and a child who cannot be corrected by reproof will only be hardened by blows (I.3).",
 o:"Plato's <i>Gorgias</i> had already denied that skill in persuasion has any tie to goodness. Quintilian's definition answers by stipulation, and the question returns wherever rhetoric is taught, now including in the training of persuasive machines."},
 
-{n:"Montaigne, Of the Education of Children",by:"Michel de Montaigne",t:"west",d:"1580",era:"Early modern",l:"unformed",f:"f",wk:"Essays_(Montaigne)",
+{n:"Montaigne, Of the Education of Children",ol:[["Charles Cotton translation (Project Gutenberg)", "https://www.gutenberg.org/ebooks/search/?query=essays+of+michel+de+montaigne"]],by:"Michel de Montaigne",t:"west",d:"1580",era:"Early modern",l:"unformed",f:"f",wk:"Essays_(Montaigne)",
 read:"<i>Essays</i> I.26 (I.25 in some editions), with I.25 ‘Of Pedantry’",
 tr:"Donald M. Frame (1958) or M. A. Screech (1991)",
 w:"An essay addressed to a noblewoman expecting a son. Montaigne asks for a tutor with a well-made rather than a well-filled head, and for an education that forms judgment rather than memory.",
@@ -618,7 +619,7 @@ o:"The scheme assumes a tutor for one aristocratic boy. Pascal objected on anoth
 );
 // Modernity
 E.push(
-{n:"Locke, Some Thoughts Concerning Education",by:"John Locke",t:"mod",home:"European",d:"1693",era:"Early modern",l:"unformed",f:"f",wk:"Some_Thoughts_Concerning_Education",
+{n:"Locke, Some Thoughts Concerning Education",ol:[["Full text (Standard Ebooks)", "https://standardebooks.org/ebooks/john-locke/some-thoughts-concerning-education/text/single-page"]],by:"John Locke",t:"mod",home:"European",d:"1693",era:"Early modern",l:"unformed",f:"f",wk:"Some_Thoughts_Concerning_Education",
 read:"§§1, 33, 56–58, 64–66, 81, 134, 216; with <i>Essay Concerning Human Understanding</i> II.1.2",
 tr:"Original English; ed. John and Jean Yolton (1989)",
 w:"Letters of advice to a friend on raising his son, published as a book that dominated English and then European thinking about children for a century. Locke says that of all the people we meet, nine parts in ten are what they are, good or bad, useful or not, by their education (§1).",
@@ -628,7 +629,7 @@ x:"In order of importance: virtue, wisdom, breeding, and last learning (§134). 
 k:"A tutor of good breeding who governs by esteem and disgrace rather than beating (§§56–58), and who reasons with children as soon as they can understand (§81).",
 o:"Leibniz, in the <i>New Essays</i>, replied that the mind is less like blank paper than like a block of marble with veins that mark out the shape of a figure. Rousseau rejected reasoning with children: childhood, he said, is the sleep of reason."},
 
-{n:"Rousseau, Emile",by:"Jean-Jacques Rousseau",t:"mod",home:"European",d:"1762",era:"Early modern",l:"natural",f:"f",wk:"Emile,_or_On_Education",
+{n:"Rousseau, Emile",ol:[["Barbara Foxley translation (Project Gutenberg)", "https://www.gutenberg.org/ebooks/5427"]],by:"Jean-Jacques Rousseau",t:"mod",home:"European",d:"1762",era:"Early modern",l:"natural",f:"f",wk:"Emile,_or_On_Education",
 read:"Book I (opening; man or citizen); Book II (negative education); Book III (Robinson Crusoe); Book V (Sophie)",
 tr:"Allan Bloom, <i>Emile, or On Education</i> (1979)",
 w:"A treatise in the form of a novel. Everything is good as it comes from the hands of the Author of things; everything degenerates in the hands of man. A tutor raises an imaginary boy, Emile, from birth to marriage. The book was condemned and burned in Paris and Geneva the year it appeared.",
@@ -638,7 +639,7 @@ x:"In childhood, as little as possible: the first education should be purely neg
 k:"An all-controlling tutor who arranges the world so that the child believes he is free. There is no subjection so complete, Rousseau writes, as one that keeps the appearance of freedom.",
 o:"Mary Wollstonecraft, in <i>A Vindication of the Rights of Woman</i> (1792), attacked Book V, where Sophie is educated only to please and serve Emile. Readers have never forgotten that Rousseau, by his own account in the <i>Confessions</i>, left all five of his children at a foundling hospital."},
 
-{n:"Kant, Enlightenment and Pedagogy",by:"Immanuel Kant",t:"mod",home:"European",d:"1784; lectures published 1803",era:"Modern",l:"free",f:"f",wk:"What_Is_Enlightenment%3F",
+{n:"Kant, Enlightenment and Pedagogy",ol:[["What Is Enlightenment?", "https://archive.org/details/AnswerTheQuestionWhatIsEnlightenment"], ["On Education, Churton translation (Online Library of Liberty)", "https://oll.libertyfund.org/titles/kant-kant-on-education-uber-padagogik"]],by:"Immanuel Kant",t:"mod",home:"European",d:"1784; lectures published 1803",era:"Modern",l:"free",f:"f",wk:"What_Is_Enlightenment%3F",
 read:"‘An Answer to the Question: What Is Enlightenment?’ (1784, 8 pages); <i>Lectures on Pedagogy</i>, introduction",
 tr:"Robert Louden in <i>Anthropology, History, and Education</i> (Cambridge, 2007)",
 w:"Enlightenment is the human being's emergence from self-incurred immaturity, the inability to use one's own understanding without another's guidance. Its motto: have the courage to use your own understanding. The pedagogy lectures, delivered at Königsberg and published by a student, give the programme that produces such a person.",
@@ -648,7 +649,7 @@ x:"Four stages: discipline, which tames savagery; culture, which gives skills; c
 k:"A provisional guardian who must work to become unnecessary. Kant notes the circle: educators were themselves badly educated. He admired Basedow's experimental school at Dessau and wrote in its support.",
 o:"J. G. Hamann replied in a letter of December 1784 that Kant blamed the immature for their immaturity and let the guardians, the king among them, off lightly. Hegel and later the communitarians objected that autonomy so defined has no content without the customs of a people."},
 
-{n:"Humboldt and Bildung",by:"Wilhelm von Humboldt",t:"mod",home:"European",d:"c. 1792–1810",era:"Modern",l:"free",f:"f",wk:"Bildung",
+{n:"Humboldt and Bildung",ol:[["The Sphere and Duties of Government (Online Library of Liberty)", "https://oll.libertyfund.org/titles/589"]],by:"Wilhelm von Humboldt",t:"mod",home:"European",d:"c. 1792–1810",era:"Modern",l:"free",f:"f",wk:"Bildung",
 read:"‘Theory of Bildung’ (fragment, c. 1793); <i>The Limits of State Action</i>, ch. 2; the memorandum on the organization of the Berlin university (1809/10)",
 tr:"<i>The Limits of State Action</i>, ed. J. W. Burrow (1969); the Bildung fragment in Westbury, Hopmann and Riquarts, eds., <i>Teaching as a Reflective Practice</i> (2000); the Berlin memorandum in <i>Minerva</i> 8 (1970)",
 w:"The Prussian reformer who founded the University of Berlin in 1810 and gave modern Europe its ideal of <i>Bildung</i>, self-formation through engagement with the world. John Stuart Mill took his epigraph for <i>On Liberty</i> from Humboldt.",
@@ -658,7 +659,7 @@ x:"Not a fixed body of knowledge. In the university, science is treated as somet
 k:"A senior partner in research. The state should protect the university and otherwise stay out of it.",
 o:"Nietzsche mocked the cultivated philistine (<i>Bildungsphilister</i>) whom Bildung had become, and sociologists have shown how Bildung turned into the credential of a class. The university Humboldt designed became the model that later, in Lyotard's account, lost its legitimating story."},
 
-{n:"Macaulay, Minute on Indian Education",by:"Thomas Babington Macaulay",t:"mod",home:"Colonial India",d:"2 February 1835",era:"Modern",l:"resource",f:"t",wk:"Minute_on_Indian_Education",
+{n:"Macaulay, Minute on Indian Education",ol:[["The Minute (Frances Pritchett's archive)", "https://franpritchett.com/00generallinks/macaulay/txt_minute_education_1835.html"]],by:"Thomas Babington Macaulay",t:"mod",home:"Colonial India",d:"2 February 1835",era:"Modern",l:"resource",f:"t",wk:"Minute_on_Indian_Education",
 read:"The Minute itself (about 12 pages); H. T. Prinsep's dissenting note",
 tr:"Original English, widely reprinted and online",
 w:"The Committee of Public Instruction in Bengal was split between ‘Orientalists’, who wanted to fund Sanskrit and Arabic learning, and ‘Anglicists’. Macaulay, newly arrived as Law Member of the Governor-General's council, settled it with a memorandum that Governor-General Bentinck adopted a month later. He admitted he knew neither Sanskrit nor Arabic, and declared that a single shelf of a good European library was worth the whole native literature of India and Arabia.",
@@ -678,7 +679,7 @@ x:"English and Western sciences, with religious instruction alongside.",
 k:"The modern college, staffed partly by English teachers, under Muslim patronage.",
 o:"The Deoband seminary, founded in 1866, took the opposite path, preserving the inherited curriculum outside the state. Jamāl al-Dīn al-Afghānī's <i>Refutation of the Materialists</i> (1881) attacked Sir Syed's naturism. The poet Akbar Allahabadi spent a career satirizing the Aligarh graduate. Iqbal took up the question a generation later."},
 
-{n:"Newman, The Idea of a University",by:"John Henry Newman",t:"mod",home:"European",d:"lectures 1852; book 1873",era:"Modern",l:"unformed",f:"f",wk:"The_Idea_of_a_University",
+{n:"Newman, The Idea of a University",ol:[["Full text (Newman Reader)", "https://www.newmanreader.org/works/idea/"]],by:"John Henry Newman",t:"mod",home:"European",d:"lectures 1852; book 1873",era:"Modern",l:"unformed",f:"f",wk:"The_Idea_of_a_University",
 read:"Preface; Discourses V (‘Knowledge Its Own End’), VI–VII, and VIII (the gentleman)",
 tr:"Original English; ed. Frank M. Turner (1996)",
 w:"Lectures given in Dublin when Newman was rector of a new Catholic university. They are the classic defence of liberal education against the utilitarians of the <i>Edinburgh Review</i>, who asked what learning was for.",
@@ -688,7 +689,7 @@ x:"Universal knowledge, theology included, since a university that omits any bra
 k:"A university as a community of teachers and students, more than its formal instruction. Newman said that if he had to choose between a university that gave degrees by examination without residence and one that simply gathered young men together for three or four years, he would choose the second.",
 o:"The utilitarians he was answering, and the Humboldtian research university that soon made his separation of teaching from research obsolete. A religious objection also follows from his own premise: if knowledge cannot make anyone good, why should the Church found universities?"},
 
-{n:"Nietzsche, Schopenhauer as Educator",by:"Friedrich Nietzsche",t:"mod",home:"European",d:"1872–1874",era:"Modern",l:"free",f:"f",wk:"Untimely_Meditations",
+{n:"Nietzsche, Schopenhauer as Educator",ol:[["Thoughts out of Season, Part II (Project Gutenberg)", "https://www.gutenberg.org/ebooks/38226"]],by:"Friedrich Nietzsche",t:"mod",home:"European",d:"1872–1874",era:"Modern",l:"free",f:"f",wk:"Untimely_Meditations",
 read:"‘Schopenhauer as Educator’ (Untimely Meditations III), §§1–3; ‘On the Future of Our Educational Institutions’ (1872), lecture 1",
 tr:"R. J. Hollingdale, <i>Untimely Meditations</i> (1983); Damion Searls, <i>Anti-Education</i> (2016)",
 w:"Two early works by a young professor at Basel. The lectures attack the German gymnasium and university for serving the state and journalism. The essay asks what a true educator is, and answers with the figure who first showed Nietzsche what philosophy could be.",
@@ -708,7 +709,7 @@ x:"Specialized knowledge, methods, ‘inconvenient facts’, and clarity about m
 k:"A specialist, not a leader or prophet. Students in a lecture hall must be silent and cannot answer back, so the professor who preaches there abuses his position. Youth, Weber says, are looking for leaders and are given teachers.",
 o:"Leo Strauss, in <i>Natural Right and History</i> (1953), argued that Weber's separation of facts from values is itself a value judgment and leads to nihilism. For this atlas, Weber is the moment formation is formally expelled from the university."},
 
-{n:"Dewey, Democracy and Education",by:"John Dewey",t:"mod",home:"American",d:"1916",era:"Modern",l:"unformed",f:"b",wk:"Democracy_and_Education",
+{n:"Dewey, Democracy and Education",ol:[["Full text (Project Gutenberg)", "https://www.gutenberg.org/ebooks/852"]],by:"John Dewey",t:"mod",home:"American",d:"1916",era:"Modern",l:"unformed",f:"b",wk:"Democracy_and_Education",
 read:"Chs. 1, 4 (‘Education as Growth’), 6–8, 24; with <i>Experience and Education</i> (1938)",
 tr:"Original English",
 w:"Dewey's systematic statement, written with Peirce's pragmatism behind it. Philosophy itself, he says near the end, can be defined as the general theory of education. In 1919–21 he lectured in China for two years, with Hu Shih interpreting, one of the few documented meetings of two of the traditions in this atlas.",
@@ -718,7 +719,7 @@ x:"Experience reconstructed so that it adds to the meaning of experience and to 
 k:"The teacher arranges the environment and takes part in the shared activity. Aims are internal to activities, not imposed from outside. In 1938 Dewey criticized progressive schools that took ‘freedom’ to mean the absence of direction.",
 o:"Robert Maynard Hutchins argued for a fixed curriculum of great books because human nature is the same everywhere. Arendt's ‘Crisis in Education’ was aimed in part at what American schools had made of Dewey."},
 
-{n:"Tagore, The Parrot's Training",by:"Rabindranath Tagore",t:"mod",home:"Indian",d:"1918; Visva-Bharati founded 1921",era:"Modern",l:"natural",f:"f",wk:"Rabindranath_Tagore",
+{n:"Tagore, The Parrot's Training",ol:[["The Parrot's Training (Internet Archive)", "https://archive.org/details/ParrotsTraining-RabindranathTagore"]],by:"Rabindranath Tagore",t:"mod",home:"Indian",d:"1918; Visva-Bharati founded 1921",era:"Modern",l:"natural",f:"f",wk:"Rabindranath_Tagore",
 read:"‘The Parrot's Training’ (a short fable); ‘My School’ in <i>Personality</i> (1917)",
 tr:"Original Bengali and Tagore's own English",
 w:"A king decides his parrot needs education. Pundits build a golden cage, scribes copy texts and stuff the pages into its beak, and officials report progress. The bird dies, and the king's nephews announce that its education is complete. Tagore had founded a school at Santiniketan in 1901, with classes under trees and teaching in Bengali, and in 1921 the university Visva-Bharati.",
@@ -728,7 +729,7 @@ x:"Nature, art, music, a mother tongue, and the meeting of cultures.",
 k:"A companion who lives alongside the students, in a place that itself teaches.",
 o:"In 1921 Gandhi called on students to leave government schools. Tagore objected in ‘The Call of Truth’ that non-cooperation was a creed of negation, and Gandhi replied in ‘The Great Sentinel’. Gandhi's own scheme of Nai Talim (1937) made a productive craft the centre of schooling and made schools pay for themselves, a sharper break with colonial education than Tagore's."},
 
-{n:"Iqbal, Reconstruction and Khudi",by:"Muhammad Iqbal",t:"mod",home:"Islamic, South Asia",d:"1915–1936",era:"Modern",l:"free",f:"f",wk:"The_Reconstruction_of_Religious_Thought_in_Islam",
+{n:"Iqbal, Reconstruction and Khudi",ol:[["The Reconstruction (Iqbal Cyber Library)", "https://iqbalcyberlibrary.net/en/342.html"]],by:"Muhammad Iqbal",t:"mod",home:"Islamic, South Asia",d:"1915–1936",era:"Modern",l:"free",f:"f",wk:"The_Reconstruction_of_Religious_Thought_in_Islam",
 read:"<i>The Reconstruction of Religious Thought in Islam</i>, lectures 1, 4 and 5; <i>Asrar-i-Khudi</i> (1915); the section ‘Taleem o Tarbiyat’ in <i>Zarb-i-Kalim</i> (1936)",
 tr:"<i>Reconstruction</i> in Iqbal's English (1930/1934); <i>Asrar</i> trans. R. A. Nicholson, <i>The Secrets of the Self</i> (1920)",
 w:"The poet-philosopher who sought to reconstruct Islamic thought with Bergson, Nietzsche and the Qur'an in view, and who gave Pakistan its founding vision. In verse he attacked both the madrasa, for producing narrow clerics, and the modern school, for producing servile clerks; both, he thought, killed the self.",
@@ -915,7 +916,7 @@ function render(){
     <div style="min-width:0">
       <h3><a href="${wiki(d.wk)}" target="_blank" rel="noopener" title="About this text">${d.n}</a></h3>
       <p class="by">${d.by}</p>
-      <p class="rd"><b>Read</b>${d.read}</p>
+      <p class="rd"><b>Read</b>${d.read}${d.ol?`<span class="ol"><b>Online</b>${d.ol.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}</a>`).join("")}</span>`:""}</p>
       <dl>
         <dt>The work</dt><dd>${d.w}</dd>
         <dt>The person</dt><dd class="person">${d.p}</dd>
@@ -928,7 +929,26 @@ function render(){
       ${mineHTML(d.n)}
     </div>
   </article>`).join(""):`<p class="empty">${q?`Nothing matches “${esc(state.q)}”. Try a shorter word, or clear the search.`:`No text matches all three filters. Choose "All" in one row to widen the list.`}</p>`;
-  wireMine();renderBar();
+  wireMine();renderBar();host.querySelectorAll(".entry").forEach(el=>linkify(el));
+}
+
+
+const TERMS=[["Śaṅkara", "https://en.wikipedia.org/wiki/Adi_Shankara"], ["Rāmānuja", "https://en.wikipedia.org/wiki/Ramanuja"], ["Ambedkar", "https://en.wikipedia.org/wiki/B._R._Ambedkar"], ["Gandhi", "https://en.wikipedia.org/wiki/Mahatma_Gandhi"], ["Nāgārjuna", "https://en.wikipedia.org/wiki/Nagarjuna"], ["Mīmāṃsā", "https://en.wikipedia.org/wiki/Mimamsa"], ["Nyāya", "https://en.wikipedia.org/wiki/Nyaya"], ["Bhikkhu Bodhi", "https://en.wikipedia.org/wiki/Bhikkhu_Bodhi"], ["Kumārajīva", "https://en.wikipedia.org/wiki/Kumarajiva"], ["Mahāyāna", "https://en.wikipedia.org/wiki/Mahayana"], ["Mahābhārata", "https://en.wikipedia.org/wiki/Mahabharata"], ["Brahma Sūtra", "https://en.wikipedia.org/wiki/Brahma_Sutras"], ["Śāriputra", "https://en.wikipedia.org/wiki/Sariputta"], ["Ānanda", "https://en.wikipedia.org/wiki/Ananda"], ["Vedas", "https://en.wikipedia.org/wiki/Vedas"], ["Veda", "https://en.wikipedia.org/wiki/Vedas"], ["Upanishads", "https://en.wikipedia.org/wiki/Upanishads"], ["brahman", "https://en.wikipedia.org/wiki/Brahman"], ["ātman", "https://en.wikipedia.org/wiki/Ātman_(Hinduism)"], ["dharma", "https://en.wikipedia.org/wiki/Dharma"], ["mokṣa", "https://en.wikipedia.org/wiki/Moksha"], ["nibbāna", "https://en.wikipedia.org/wiki/Nirvana_(Buddhism)"], ["bhakti", "https://en.wikipedia.org/wiki/Bhakti"], ["guṇas", "https://en.wikipedia.org/wiki/Guṇa"], ["Yama", "https://en.wikipedia.org/wiki/Yama"], ["Confucius", "https://en.wikipedia.org/wiki/Confucius"], ["Mencius", "https://en.wikipedia.org/wiki/Mencius"], ["Xunzi", "https://en.wikipedia.org/wiki/Xunzi_(philosopher)"], ["Laozi", "https://en.wikipedia.org/wiki/Laozi"], ["Zhuangzi", "https://en.wikipedia.org/wiki/Zhuang_Zhou"], ["Gaozi", "https://en.wikipedia.org/wiki/Gaozi_(philosopher)"], ["Mohists", "https://en.wikipedia.org/wiki/Mohism"], ["Han Fei", "https://en.wikipedia.org/wiki/Han_Fei"], ["Li Si", "https://en.wikipedia.org/wiki/Li_Si"], ["Lu Xiangshan", "https://en.wikipedia.org/wiki/Lu_Jiuyuan"], ["Gu Yanwu", "https://en.wikipedia.org/wiki/Gu_Yanwu"], ["Luo Qinshun", "https://en.wikipedia.org/wiki/Luo_Qinshun"], ["Zhu Xi", "https://en.wikipedia.org/wiki/Zhu_Xi"], ["Wang Yangming", "https://en.wikipedia.org/wiki/Wang_Yangming"], ["Neo-Confucianism", "https://en.wikipedia.org/wiki/Neo-Confucianism"], ["Legalism", "https://en.wikipedia.org/wiki/Legalism_(Chinese_philosophy)"], ["Book of Documents", "https://en.wikipedia.org/wiki/Book_of_Documents"], ["Great Learning", "https://en.wikipedia.org/wiki/Great_Learning"], ["Doctrine of the Mean", "https://en.wikipedia.org/wiki/Doctrine_of_the_Mean"], ["Four Books", "https://en.wikipedia.org/wiki/Four_Books_and_Five_Classics"], ["civil service examinations", "https://en.wikipedia.org/wiki/Imperial_examination"], ["Yao", "https://en.wikipedia.org/wiki/Emperor_Yao"], ["Shun", "https://en.wikipedia.org/wiki/Emperor_Shun"], ["Yu", "https://en.wikipedia.org/wiki/Yu_the_Great"], ["Duke Huan", "https://en.wikipedia.org/wiki/Duke_Huan_of_Qi"], ["Yan Hui", "https://en.wikipedia.org/wiki/Yan_Hui"], ["Fārābī", "https://en.wikipedia.org/wiki/Al-Farabi"], ["Miskawayh", "https://en.wikipedia.org/wiki/Ibn_Miskawayh"], ["al-Ghazālī", "https://en.wikipedia.org/wiki/Al-Ghazali"], ["Al-Ghazālī", "https://en.wikipedia.org/wiki/Al-Ghazali"], ["Ibn Rushd", "https://en.wikipedia.org/wiki/Averroes"], ["Ibn Ṭufayl", "https://en.wikipedia.org/wiki/Ibn_Tufail"], ["Ibn Khaldūn", "https://en.wikipedia.org/wiki/Ibn_Khaldun"], ["Ibn al-Nafīs", "https://en.wikipedia.org/wiki/Ibn_al-Nafis"], ["Zarnūjī", "https://en.wikipedia.org/wiki/Burhan_al-Din_al-Zarnuji"], ["Abū Ḥanīfa", "https://en.wikipedia.org/wiki/Abu_Hanifa"], ["Galen", "https://en.wikipedia.org/wiki/Galen"], ["Active Intellect", "https://en.wikipedia.org/wiki/Active_intellect"], ["Incoherence of the Philosophers", "https://en.wikipedia.org/wiki/The_Incoherence_of_the_Philosophers"], ["Incoherence of the Incoherence", "https://en.wikipedia.org/wiki/The_Incoherence_of_the_Incoherence"], ["Taʿlīmiyya", "https://en.wikipedia.org/wiki/Batiniyya"], ["Sufis", "https://en.wikipedia.org/wiki/Sufism"], ["Edward Pococke", "https://en.wikipedia.org/wiki/Edward_Pococke"], ["Leo Strauss", "https://en.wikipedia.org/wiki/Leo_Strauss"], ["Nizāmiyya", "https://en.wikipedia.org/wiki/Nizamiyya"], ["madrasa", "https://en.wikipedia.org/wiki/Madrasa"], ["fiṭra", "https://en.wikipedia.org/wiki/Fitra"], ["taqlīd", "https://en.wikipedia.org/wiki/Taqlid"], ["ijāza", "https://en.wikipedia.org/wiki/Ijazah"], ["isnād", "https://en.wikipedia.org/wiki/Isnad"], ["ʿulamāʾ", "https://en.wikipedia.org/wiki/Ulama"], ["Dars-i Nizami", "https://en.wikipedia.org/wiki/Dars-e-Nizami"], ["Ijtihad", "https://en.wikipedia.org/wiki/Ijtihad"], ["Moses", "https://en.wikipedia.org/wiki/Moses"], ["Mishnah", "https://en.wikipedia.org/wiki/Mishnah"], ["Talmud", "https://en.wikipedia.org/wiki/Talmud"], ["Torah", "https://en.wikipedia.org/wiki/Torah"], ["Great Assembly", "https://en.wikipedia.org/wiki/Great_Assembly"], ["Hillel", "https://en.wikipedia.org/wiki/Hillel_the_Elder"], ["Shammai", "https://en.wikipedia.org/wiki/Shammai"], ["Elisha ben Abuya", "https://en.wikipedia.org/wiki/Elisha_ben_Abuyah"], ["Rabbi Meir", "https://en.wikipedia.org/wiki/Rabbi_Meir"], ["Judah Halevi", "https://en.wikipedia.org/wiki/Judah_Halevi"], ["Kuzari", "https://en.wikipedia.org/wiki/Kuzari"], ["Adeodatus", "https://en.wikipedia.org/wiki/Adeodatus"], ["Bonaventure", "https://en.wikipedia.org/wiki/Bonaventure"], ["Pelagius", "https://en.wikipedia.org/wiki/Pelagius"], ["Augustine", "https://en.wikipedia.org/wiki/Augustine_of_Hippo"], ["Aquinas", "https://en.wikipedia.org/wiki/Thomas_Aquinas"], ["Maimonides", "https://en.wikipedia.org/wiki/Maimonides"], ["Hugh of St Victor", "https://en.wikipedia.org/wiki/Hugh_of_Saint_Victor"], ["Virgil", "https://en.wikipedia.org/wiki/Virgil"], ["Plato", "https://en.wikipedia.org/wiki/Plato"], ["Aristotle", "https://en.wikipedia.org/wiki/Aristotle"], ["Isocrates", "https://en.wikipedia.org/wiki/Isocrates"], ["Quintilian", "https://en.wikipedia.org/wiki/Quintilian"], ["Cato", "https://en.wikipedia.org/wiki/Cato_the_Elder"], ["phronesis", "https://en.wikipedia.org/wiki/Phronesis"], ["eudaimonia", "https://en.wikipedia.org/wiki/Eudaimonia"], ["hexis", "https://en.wikipedia.org/wiki/Hexis"], ["liberal arts", "https://en.wikipedia.org/wiki/Liberal_arts_education"], ["Montaigne", "https://en.wikipedia.org/wiki/Michel_de_Montaigne"], ["Pascal", "https://en.wikipedia.org/wiki/Blaise_Pascal"], ["Locke", "https://en.wikipedia.org/wiki/John_Locke"], ["Leibniz", "https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz"], ["Rousseau", "https://en.wikipedia.org/wiki/Jean-Jacques_Rousseau"], ["Mary Wollstonecraft", "https://en.wikipedia.org/wiki/Mary_Wollstonecraft"], ["Robinson Crusoe", "https://en.wikipedia.org/wiki/Robinson_Crusoe"], ["Kant", "https://en.wikipedia.org/wiki/Immanuel_Kant"], ["Hamann", "https://en.wikipedia.org/wiki/Johann_Georg_Hamann"], ["Basedow", "https://en.wikipedia.org/wiki/Johann_Bernhard_Basedow"], ["Hegel", "https://en.wikipedia.org/wiki/Georg_Wilhelm_Friedrich_Hegel"], ["Humboldt", "https://en.wikipedia.org/wiki/Wilhelm_von_Humboldt"], ["John Stuart Mill", "https://en.wikipedia.org/wiki/John_Stuart_Mill"], ["On Liberty", "https://en.wikipedia.org/wiki/On_Liberty"], ["University of Berlin", "https://en.wikipedia.org/wiki/Humboldt_University_of_Berlin"], ["Bentinck", "https://en.wikipedia.org/wiki/Lord_William_Bentinck"], ["Deoband", "https://en.wikipedia.org/wiki/Darul_Uloom_Deoband"], ["Jamāl al-Dīn al-Afghānī", "https://en.wikipedia.org/wiki/Jamal_al-Din_al-Afghani"], ["Akbar Allahabadi", "https://en.wikipedia.org/wiki/Akbar_Allahabadi"], ["Aligarh", "https://en.wikipedia.org/wiki/Aligarh_Muslim_University"], ["Newman", "https://en.wikipedia.org/wiki/John_Henry_Newman"], ["Nietzsche", "https://en.wikipedia.org/wiki/Friedrich_Nietzsche"], ["Schopenhauer", "https://en.wikipedia.org/wiki/Arthur_Schopenhauer"], ["Zarathustra", "https://en.wikipedia.org/wiki/Thus_Spoke_Zarathustra"], ["Weber", "https://en.wikipedia.org/wiki/Max_Weber"], ["Tolstoy", "https://en.wikipedia.org/wiki/Leo_Tolstoy"], ["disenchantment", "https://en.wikipedia.org/wiki/Disenchantment"], ["Dewey", "https://en.wikipedia.org/wiki/John_Dewey"], ["Peirce", "https://en.wikipedia.org/wiki/Charles_Sanders_Peirce"], ["Hu Shih", "https://en.wikipedia.org/wiki/Hu_Shih"], ["Robert Maynard Hutchins", "https://en.wikipedia.org/wiki/Robert_Maynard_Hutchins"], ["Tagore", "https://en.wikipedia.org/wiki/Rabindranath_Tagore"], ["Santiniketan", "https://en.wikipedia.org/wiki/Santiniketan"], ["Visva-Bharati", "https://en.wikipedia.org/wiki/Visva-Bharati_University"], ["Nai Talim", "https://en.wikipedia.org/wiki/Nai_Talim"], ["Hind Swaraj", "https://en.wikipedia.org/wiki/Hind_Swaraj_or_Indian_Home_Rule"], ["Iqbal", "https://en.wikipedia.org/wiki/Muhammad_Iqbal"], ["Rumi", "https://en.wikipedia.org/wiki/Rumi"], ["Bergson", "https://en.wikipedia.org/wiki/Henri_Bergson"], ["Asrar", "https://en.wikipedia.org/wiki/Asrar-e-Khudi"], ["Arendt", "https://en.wikipedia.org/wiki/Hannah_Arendt"], ["Ralph Ellison", "https://en.wikipedia.org/wiki/Ralph_Ellison"], ["Freire", "https://en.wikipedia.org/wiki/Paulo_Freire"], ["Peter Berger", "https://en.wikipedia.org/wiki/Peter_L._Berger"], ["Illich", "https://en.wikipedia.org/wiki/Ivan_Illich"], ["Herbert Gintis", "https://en.wikipedia.org/wiki/Herbert_Gintis"], ["Rancière", "https://en.wikipedia.org/wiki/Jacques_Rancière"], ["Jacotot", "https://en.wikipedia.org/wiki/Joseph_Jacotot"], ["Fénelon", "https://en.wikipedia.org/wiki/François_Fénelon"], ["Lyotard", "https://en.wikipedia.org/wiki/Jean-François_Lyotard"], ["Habermas", "https://en.wikipedia.org/wiki/Jürgen_Habermas"], ["Fazlur Rahman", "https://en.wikipedia.org/wiki/Fazlur_Rahman_Malik"], ["al-Attas", "https://en.wikipedia.org/wiki/Syed_Muhammad_Naquib_al-Attas"], ["Al-Attas", "https://en.wikipedia.org/wiki/Syed_Muhammad_Naquib_al-Attas"], ["Ngũgĩ", "https://en.wikipedia.org/wiki/Ngũgĩ_wa_Thiong'o"], ["Chinua Achebe", "https://en.wikipedia.org/wiki/Chinua_Achebe"], ["Achebe", "https://en.wikipedia.org/wiki/Chinua_Achebe"], ["MacIntyre", "https://en.wikipedia.org/wiki/Alasdair_MacIntyre"], ["Martha Nussbaum", "https://en.wikipedia.org/wiki/Martha_Nussbaum"], ["Nussbaum", "https://en.wikipedia.org/wiki/Martha_Nussbaum"], ["Macaulay", "https://en.wikipedia.org/wiki/Thomas_Babington_Macaulay"], ["Sir Syed", "https://en.wikipedia.org/wiki/Syed_Ahmad_Khan"], ["Bildung", "https://en.wikipedia.org/wiki/Bildung"], ["human capital", "https://en.wikipedia.org/wiki/Human_capital"], ["banking", "https://en.wikipedia.org/wiki/Banking_model_of_education"], ["natality", "https://en.wikipedia.org/wiki/Natality"], ["Prussia", "https://en.wikipedia.org/wiki/Kingdom_of_Prussia"], ["Kalām", "https://en.wikipedia.org/wiki/Kalam"], ["theologians", "https://en.wikipedia.org/wiki/Kalam"], ["Mādhyamika", "https://en.wikipedia.org/wiki/Madhyamaka"], ["Edinburgh Review", "https://en.wikipedia.org/wiki/Edinburgh_Review"], ["Untimely Meditations", "https://en.wikipedia.org/wiki/Untimely_Meditations"]].sort((a,b)=>b[0].length-a[0].length);
+const TRE=new RegExp("(^|[^\\p{L}])("+TERMS.map(t=>t[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}])","u");
+function linkify(root){
+  const seen=new Set();
+  const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest("a,button,textarea,input,label,.mine,h1,h2,h3,h4,.eyebrow,.lab,.chip,.toc,.tr")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const nodes=[];while(walk.nextNode())nodes.push(walk.currentNode);
+  nodes.forEach(node=>{
+    let txt=node.nodeValue,frag=null,guard=0;
+    while(guard++<30){const m=TRE.exec(txt);if(!m)break;
+      const term=m[2];const i=m.index+m[1].length;
+      frag=frag||document.createDocumentFragment();
+      if(seen.has(term)){frag.append(txt.slice(0,i+term.length));txt=txt.slice(i+term.length);continue}
+      seen.add(term);
+      frag.append(txt.slice(0,i));const a=document.createElement("a");a.className="gl";a.href=TERMS.find(t=>t[0]===term)[1];a.target="_blank";a.rel="noopener";a.textContent=term;frag.append(a);txt=txt.slice(i+term.length)}
+    if(frag){frag.append(txt);node.replaceWith(frag)}
+  });
 }
 
 /* Readings: base text from readings.js, local edits on top */
@@ -985,6 +1005,7 @@ function renderBar(){
   rn.onkeydown=e=>{if(e.key==="Enter")rn.blur()};
 }
 
+document.querySelectorAll("#question .prose, #traditions .prose p, #across .prose p, #unanswered .prose p, .note p:first-child").forEach(el=>linkify(el));
 document.getElementById("wordlist").innerHTML=WORDS.map(([w,s,o,def])=>`<div class="word"><h4>${w}${s?`<span class="s">${s}</span>`:""}<span class="o">${o}</span></h4><p>${def}</p></div>`).join("");
 
 const qi=document.getElementById("q");
