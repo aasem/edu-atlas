@@ -1,4 +1,4 @@
-# Atlas of Education
+# Atlas of Educational Philosophy
 
 Fifty-four texts on education from India, China, Islam, Judaism and Christianity, Greece and Rome, and modernity, each read through one governing question:
 
