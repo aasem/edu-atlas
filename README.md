@@ -1,6 +1,6 @@
 # Atlas of Educational Philosophy
 
-Fifty-four texts on education from India, China, Islam, Judaism and Christianity, Greece and Rome, and modernity, each read through one governing question:
+Fifty-nine texts on education from India, China, Islam, Judaism and Christianity, Greece, Rome and the Renaissance, and modernity, each read through one governing question:
 
 > What kind of being does education presume the learner to be, and given that being, is education the formation of a person or the transmission of knowledge, toward what end, and on whose authority?
 

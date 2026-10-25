@@ -126,4 +126,14 @@ window.READINGS = {
   "Ngũgĩ, Decolonising the Mind": `The sign hung on the child's neck is the colonial school in one image. Achebe's reply matters as much: the question for Urdu textbooks is not whether to abandon English but what the mother tongue makes possible that English cannot.`,
 
   "MacIntyre, Tradition and the University": `The university as constrained disagreement between traditions is the most promising institutional idea in the modern section. Nussbaum's worry is real but answerable: a tradition that cannot answer its critics loses by its own standards.`,
+
+  "Pico della Mirandola, Oration on the Dignity of Man": `The first Western text to say the learner has no fixed nature, and it says so inside a ladder that leads to God. Copenhaver is right that modern readers put Sartre into it. Iqbal's khudi is closer to Pico than to Sartre: an unfinished self that still has a direction.`,
+
+  "Bacon, The Advancement of Learning": `The hinge of the modern section. Once final causes are called barren, purpose has to be brought in from outside, and the relief of man's estate is the first thing brought in. His complaint that every college served a profession and none served learning at large still describes most universities.`,
+
+  "Fichte, Addresses to the German Nation": `The most candid statement of what a national school wants: a will that cannot will otherwise. That his motive is the pure love of the good, and not reward, makes the programme more troubling, not less.`,
+
+  "Sartre, Existentialism Is a Humanism": `The logical end of the split between nature and purpose: no nature, so no end except the one each person chooses. The student he refused to advise is the strongest case in the atlas against the teacher's authority, and Murdoch's reply is the strongest case for education as training in attention.`,
+
+  "Schultz and Becker, Human Capital": `The economists did not invent the reversal, but they gave it a unit of measurement. Spence's signalling model describes better than the theory itself what a degree often does now, and it explains how a credential can come to stand in for the learning it was meant to certify.`,
 };
