@@ -6,17 +6,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Noto+Serif+SC&family=Noto+Serif+Devanagari&family=Noto+Serif+Hebrew&display=swap">
 <style>
-/* Layout: a codex — a map of learners by tradition, then one column of entries set like folios, each read through the same five questions. */
+/* Layout: a library reader — a contents pane on the left lists every text and essay; the reading pane shows one at a time. */
 :root{
   --bg:#EAEDF1; --surface:#F6F7F9; --fg:#1D2430; --muted:#5A6474; --rule:#C9D0DA;
   --accent:#2E4A78; --ochre:#97661A; --obj:#8E3B28;
   --l-veiled:#5D4A86; --l-natural:#3E6B34; --l-unformed:#97661A; --l-wayward:#9A3E2B; --l-bound:#46586E; --l-free:#22595E; --l-resource:#6E6760;
   --li:#F5F6F8;
   --f-f:#22595E; --f-t:#97661A; --f-b:#5D4A86;
+  --scrim:rgba(20,26,36,.38);
   --display:"GFS Didot","Didot","Bodoni 72",Georgia,serif;
   --body:"Literata",Georgia,"Times New Roman",serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --scripts:"Noto Naskh Arabic","Noto Serif SC","Noto Serif Devanagari","Noto Serif Hebrew",serif;
+  --top:env(safe-area-inset-top,0px);
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -25,6 +27,7 @@
   --l-veiled:#B3A2E0; --l-natural:#93C784; --l-unformed:#D9A85A; --l-wayward:#E08A73; --l-bound:#A3B4C6; --l-free:#7CC0BF; --l-resource:#ABA49C;
   --li:#121620;
   --f-f:#7CC0BF; --f-t:#D9A85A; --f-b:#B3A2E0;
+  --scrim:rgba(0,0,0,.55);
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121620; --surface:#1A202B; --fg:#DDE2EA; --muted:#949DAD; --rule:#2D3542;
@@ -32,106 +35,132 @@
   --l-veiled:#B3A2E0; --l-natural:#93C784; --l-unformed:#D9A85A; --l-wayward:#E08A73; --l-bound:#A3B4C6; --l-free:#7CC0BF; --l-resource:#ABA49C;
   --li:#121620;
   --f-f:#7CC0BF; --f-t:#D9A85A; --f-b:#B3A2E0;
+  --scrim:rgba(0,0,0,.55);
   color-scheme:dark}
 *{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--top) + 64px)}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
-.wrap{max-width:880px;margin:0 auto}
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:var(--top);z-index:30;background:var(--bg)}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.15}
 p{margin:0}
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 a{color:inherit;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 a.gl{text-decoration-style:dotted;text-decoration-color:var(--muted)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lab{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
-header.hero{padding-block:56px 28px;display:grid;gap:18px}
-.hero h1{font-size:clamp(40px,7vw,66px)}
-.hero .sc{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;margin-top:12px;font-size:clamp(17px,2.6vw,25px);color:var(--accent)}
+/* Shell */
+.shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:300px minmax(0,1fr);gap:0 56px}
+.side{position:sticky;top:var(--top);height:calc(100dvh - var(--top));overflow-y:auto;overscroll-behavior:contain;padding-block:28px 40px;padding-right:18px;border-right:1px solid var(--rule);display:grid;align-content:start;gap:22px}
+.brand{font:400 25px/1.15 var(--display);text-decoration:none;color:var(--fg)}
+.brand:hover{color:var(--accent)}
+.sgroup{display:grid;gap:2px}
+.sgroup>.lab{margin-bottom:6px}
+.side a.it{display:grid;grid-template-columns:10px minmax(0,1fr);gap:8px;align-items:baseline;padding:5px 8px;margin-left:-8px;border-radius:3px;text-decoration:none;font-size:14.5px;line-height:1.35;color:var(--fg)}
+.side a.it.plain{grid-template-columns:minmax(0,1fr)}
+.side a.it:hover{background:var(--surface);color:var(--accent)}
+.side a.it[aria-current="page"]{background:var(--surface);color:var(--accent);box-shadow:inset 2px 0 0 var(--accent)}
+.side a.it i{width:8px;height:8px;border-radius:50%;background:var(--c);transform:translateY(-1px)}
+.side a.it.essay{font-style:italic;color:var(--muted)}
+.side a.it.essay[aria-current="page"],.side a.it.essay:hover{color:var(--accent)}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.seg button{font:500 12px var(--mono);padding:6px 4px;border:0;border-left:1px solid var(--rule);background:transparent;color:var(--fg);cursor:pointer}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.find{display:flex;gap:6px;align-items:center}
+.search{flex:1 1 auto;min-width:0;font:14.5px var(--body);color:var(--fg);background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:6px 10px}
+.clear{font:500 12px var(--mono);border:1px solid var(--rule);background:transparent;color:var(--fg);border-radius:4px;padding:6px 8px;cursor:pointer}
+.tcount{font:12px/1.5 var(--mono);color:var(--muted)}
+.tcount a{color:inherit}
+.tools{position:sticky;top:-28px;z-index:2;background:var(--bg);display:grid;gap:8px;padding-block:6px 10px;margin-top:-6px;border-bottom:1px solid var(--rule)}
+.gh{display:flex;justify-content:space-between;gap:8px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 4px}
+.gh:first-child{margin-top:4px}
+.nohit{font-size:14px;color:var(--muted);font-style:italic}
+
+.main{min-width:0;padding-block:36px 72px}
+.view{max-width:760px}
+.topbar{display:none}
+.scrim{display:none}
+
+/* Views */
+.view>.eyebrow{margin-bottom:10px}
+.view h1{font-size:clamp(32px,5vw,46px)}
+.view .sub{color:var(--muted);max-width:64ch;margin-block:10px 22px}
+.prose{max-width:66ch;display:grid;gap:12px}
+.prose h3{font-size:23px;margin-top:14px}
+.hero{display:grid;gap:14px;margin-bottom:34px;padding-bottom:28px;border-bottom:1px solid var(--rule)}
+.hero h1{font-size:clamp(38px,6vw,60px)}
+.hero .sc{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;font-size:clamp(17px,2.4vw,24px);color:var(--accent)}
 .hero .sc span{white-space:nowrap}
 .hero .sc .s{font-family:var(--scripts)}
 .hero .sc .dot{color:var(--rule)}
-.hero .lede{max-width:64ch;font-size:18px}
-.hero .lede em{color:var(--accent)}
-.toc{display:flex;flex-wrap:wrap;gap:6px 18px;font:500 12.5px var(--mono);padding-block:4px 8px}
-.toc a{text-decoration:none;color:var(--muted)}
-.toc a:hover{color:var(--accent)}
-
-section{padding-block:28px}
-section>h2{font-size:30px;margin-bottom:6px}
-.sub{color:var(--muted);max-width:64ch;margin-bottom:20px}
-.prose{max-width:66ch;display:grid;gap:12px}
-.prose h3{font-size:23px;margin-top:14px}
-
-/* Governing question */
-.gq{font-family:var(--display);font-size:clamp(22px,3.4vw,30px);line-height:1.3;max-width:30ch;margin-block:4px 22px;text-wrap:balance}
-.five{display:grid;gap:0;margin-top:18px;max-width:68ch}
+.gq{font-family:var(--display);font-size:clamp(22px,3.2vw,29px);line-height:1.3;max-width:30ch;margin-block:14px 22px;text-wrap:balance}
+.five{display:grid;gap:0;margin-top:22px;max-width:68ch}
 .five div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;padding:12px 0;border-top:1px solid var(--rule)}
 .five b{font:500 11.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-top:4px}
+.howto{margin-top:28px;max-width:66ch;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:16px 18px;display:grid;gap:8px;font-size:15px}
 
 /* Map */
 .map{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:20px;display:grid;gap:14px}
 #rows{display:grid;gap:12px}
-.mrow{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;align-items:start;padding-top:12px;border-top:1px solid var(--rule)}
-.mrow:first-of-type{border-top:0;padding-top:0}
+.mrow{display:grid;grid-template-columns:130px minmax(0,1fr);gap:14px;align-items:start;padding-top:12px;border-top:1px solid var(--rule)}
+.mrow:first-child{border-top:0;padding-top:0}
 .mrow .tl{font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:6px}
 .tiles{display:flex;flex-wrap:wrap;gap:6px}
-.tile{font:500 12.5px var(--mono);padding:5px 10px;border-radius:3px;border:0;cursor:pointer;color:var(--li);background:var(--c)}
-.tile:hover{filter:brightness(1.08)}
+.tile{font:500 12.5px var(--mono);padding:5px 10px;border-radius:3px;border:0;cursor:pointer;color:var(--li);background:var(--c);text-decoration:none}
+.tile:hover{filter:brightness(1.08);color:var(--li)}
 .sorder{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.lab{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.chip{font:500 12.5px var(--mono);padding:5px 10px;border-radius:999px;border:1px solid var(--rule);background:transparent;color:var(--fg);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px}
 .legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;vertical-align:-1px}
 .map .read{max-width:66ch;font-size:15px}
 
-/* Filters */
-.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;border-bottom:1px solid var(--rule);display:grid;gap:8px}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-.frow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.frow .lab{width:72px}
-.chip{font:500 12.5px var(--mono);padding:5px 10px;border-radius:999px;border:1px solid var(--rule);background:transparent;color:var(--fg);cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.count{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted)}
-.search{flex:1 1 260px;min-width:0;font:15px var(--body);color:var(--fg);background:var(--surface);border:1px solid var(--rule);border-radius:999px;padding:7px 14px}
-.search:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-
-/* Entries */
-.entry{display:grid;grid-template-columns:132px minmax(0,1fr);gap:24px;padding-block:28px;border-bottom:1px solid var(--rule)}
-.margin{display:grid;gap:8px;align-content:start}
-.margin .trad{font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.margin .dt{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-.pill{display:inline-flex;align-items:center;gap:6px;font:500 11.5px var(--mono);letter-spacing:.04em}
+/* A text */
+.crumb{display:flex;flex-wrap:wrap;gap:4px 14px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.crumb a{color:var(--accent);text-decoration:none}
+.by{color:var(--muted);font-size:15.5px;margin-top:8px}
+.pills{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px}
+.pill{display:inline-flex;align-items:center;gap:6px;font:500 12px var(--mono);letter-spacing:.03em}
 .pill::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
-.entry h3{font-size:29px}
-.by{color:var(--muted);font-size:14.5px;margin-top:4px}
-.rd{margin-top:10px;font-size:14.5px;max-width:64ch}
-.rd .ol{display:block;margin-top:4px}
-.rd .ol a{margin-right:14px;white-space:normal}
-.rd b{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-right:6px}
-dl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px 18px;margin:18px 0 0}
+.rd{margin-top:20px;font-size:15px;max-width:66ch;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:12px 16px;display:grid;gap:6px}
+.rd b{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ochre);margin-right:8px}
+.rd .ol a{margin-right:14px}
+dl{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px 20px;margin:24px 0 0}
 dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:4px}
 dd{margin:0;max-width:64ch;min-width:0}
 dd.person{border-left:2px solid var(--accent);padding-left:12px}
 dd.obj{color:var(--obj)}
 dd.tr{font-size:14px;color:var(--muted)}
-.entry.flash{animation:fl 1.4s ease}
-@keyframes fl{0%{background:color-mix(in srgb,var(--accent) 14%,transparent)}100%{background:transparent}}
-@media (prefers-reduced-motion:reduce){.entry.flash{animation:none}}
-.empty{padding:28px 0;color:var(--muted)}
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--rule)}
+.pager a{display:grid;gap:2px;padding:12px 14px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;min-width:0}
+.pager a:hover{border-color:var(--accent)}
+.pager a.next{text-align:right;grid-column:2}
+.pager span{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.pager b{font-weight:400;font-family:var(--display);font-size:19px;line-height:1.2}
+.listin{margin-top:30px;padding-top:18px;border-top:1px solid var(--rule);display:grid;gap:8px}
+.listin ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.listin li{display:grid;grid-template-columns:10px minmax(0,1fr);gap:10px;align-items:baseline}
+.listin li i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.listin li span{color:var(--muted);font-size:14px}
 
 /* Reading */
-.mine{margin-top:20px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:14px 16px;display:grid;gap:8px}
+.mine{margin-top:28px;background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:14px 16px;display:grid;gap:8px}
 .mine .hd{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
 .mine .hd b{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ochre)}
 .mine .hd .local{font:500 11px var(--mono);color:var(--obj)}
 .mine .txt{display:grid;gap:8px;max-width:64ch}
-.mine .txt.empty{color:var(--muted);font-style:italic;padding:0}
-.mine textarea{width:100%;min-height:120px;font:15px/1.55 var(--body);color:var(--fg);background:var(--bg);border:1px solid var(--rule);border-radius:3px;padding:10px;resize:vertical}
-.btns{display:flex;flex-wrap:wrap;gap:6px}
+.mine .txt.empty{color:var(--muted);font-style:italic}
+.mine textarea{width:100%;min-height:140px;font:15px/1.55 var(--body);color:var(--fg);background:var(--bg);border:1px solid var(--rule);border-radius:3px;padding:10px;resize:vertical}
+.btns{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .btn{font:500 12px var(--mono);padding:5px 11px;border-radius:3px;border:1px solid var(--rule);background:transparent;color:var(--fg);cursor:pointer}
 .btn.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-.mbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding-block:14px 4px;font-size:13.5px;color:var(--muted)}
-.mbar textarea{width:100%;min-height:160px;font:12px/1.5 var(--mono);color:var(--fg);background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:10px}
+.hint{font-size:13.5px;color:var(--muted)}
+.rform{display:grid;gap:14px;max-width:66ch}
+.rform .row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.rform textarea{width:100%;min-height:200px;font:12px/1.5 var(--mono);color:var(--fg);background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:10px}
 
 /* Words */
 .words{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
@@ -140,24 +169,63 @@ dd.tr{font-size:14px;color:var(--muted)}
 .word h4 .s{font-family:var(--scripts);font-weight:400;color:var(--accent);margin-left:8px}
 .word h4 .o{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-left:8px}
 .word p{font-size:15px}
+.note{display:grid;gap:12px;max-width:66ch}
+.colophon{padding-top:12px;border-top:1px solid var(--rule)}
 
-.note{font-size:14px;color:var(--muted);max-width:68ch;display:grid;gap:8px}
-.colophon{margin-top:6px;padding-top:12px;border-top:1px solid var(--rule)}
-
-@media (max-width:640px){
-  .entry{grid-template-columns:minmax(0,1fr);gap:10px}
-  .margin{grid-template-columns:auto auto;justify-content:start;gap:6px 14px;align-items:center}
+/* Narrow screens: contents become a drawer */
+@media (max-width:900px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .topbar{display:flex;align-items:center;gap:12px;position:sticky;top:var(--top);z-index:20;background:var(--bg);border-bottom:1px solid var(--rule);padding-block:10px;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .topbar button{font:500 12.5px var(--mono);padding:6px 12px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--fg);cursor:pointer;flex:none}
+  .topbar .where{min-width:0;font:400 17px/1.2 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .side{position:fixed;z-index:40;top:0;left:0;bottom:0;height:auto;width:min(340px,88vw);background:var(--bg);border-right:1px solid var(--rule);padding-top:calc(var(--top) + 20px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 32px);transform:translateX(-105%);transition:transform .22s ease;visibility:hidden}
+  body.open .side{transform:none;visibility:visible}
+  body.open .scrim{display:block;position:fixed;inset:0;z-index:35;background:var(--scrim)}
+  .main{padding-block:24px 56px}
+  .five div,.mrow{grid-template-columns:minmax(0,1fr);gap:6px}
   dl{grid-template-columns:minmax(0,1fr);gap:2px}
-  dd{margin-bottom:10px}
-  .mrow,.five div{grid-template-columns:minmax(0,1fr);gap:6px}
+  dd{margin-bottom:12px}
   .words{grid-template-columns:minmax(0,1fr)}
-  .frow .lab{width:auto}
-  .count{margin-left:0;width:100%}
+  .pager{grid-template-columns:minmax(0,1fr)}
+  .pager a.next{grid-column:1}
 }
+@media (prefers-reduced-motion:reduce){.side{transition:none}}
 </style>
 
-<div class="wrap">
-<header class="hero">
+<div class="topbar"><button type="button" id="menu" aria-controls="side" aria-expanded="false">Contents</button><span class="where" id="where"></span></div>
+<div class="shell">
+  <nav class="side" id="side" aria-label="Contents">
+    <a class="brand" href="#question">Atlas of Educational Philosophy</a>
+    <div class="sgroup">
+      <span class="lab">Begin here</span>
+      <a class="it plain" href="#question">The Governing Question</a>
+      <a class="it plain" href="#map">What the Learner Is</a>
+    </div>
+    <div class="sgroup">
+      <span class="lab">The texts</span>
+      <div class="tools">
+        <div class="seg" role="group" aria-label="Arrange the texts by"><button type="button" data-a="tradition">Tradition</button><button type="button" data-a="learner">Learner</button><button type="button" data-a="period">Period</button></div>
+        <div class="find"><label for="q" hidden>Find a text</label><input id="q" class="search" type="search" placeholder="Find a text, person or idea" autocomplete="off"><button type="button" class="clear" id="qclear" hidden>Clear</button></div>
+        <span class="tcount" id="tcount"></span>
+      </div>
+      <div id="tlist"></div>
+    </div>
+    <div class="sgroup">
+      <span class="lab">Comparing</span>
+      <a class="it plain" href="#across">Across the Traditions</a>
+      <a class="it plain" href="#unanswered">What Remains Unanswered</a>
+      <a class="it plain" href="#words">Key Words</a>
+    </div>
+    <div class="sgroup">
+      <span class="lab">The atlas</span>
+      <a class="it plain" href="#readings">Your Readings</a>
+      <a class="it plain" href="#about">About This Atlas</a>
+    </div>
+  </nav>
+  <div class="scrim" id="scrim"></div>
+  <main class="main" id="main">
+    <article class="view" data-view="question" hidden>
+      <header class="hero">
   <div class="eyebrow">Six traditions · fifty-four texts · each read through five questions</div>
   <h1>Atlas of Educational Philosophy
     <span class="sc">
@@ -168,12 +236,10 @@ dd.tr{font-size:14px;color:var(--muted)}
       <span title="Bildung: self-formation (German)">Bildung</span>
     </span>
   </h1>
-  <p class="lede"><em>What kind of being does education presume the learner to be, and given that being, is education the formation of a person or the transmission of knowledge, toward what end, and on whose authority?</em></p>
-  <nav class="toc" aria-label="Sections"><a href="#question">The Governing Question</a><a href="#map">What the Learner Is</a><a href="#traditions">The Traditions</a><a href="#atlas">The Texts</a><a href="#across">Across the Traditions</a><a href="#words">Key Words</a><a href="#unanswered">What Remains Unanswered</a></nav>
 </header>
+      <div class="eyebrow">Begin here</div>
+      <h2 style="font-size:30px">The Governing Question</h2>
 
-<section id="question">
-  <h2>The Governing Question</h2>
   <p class="gq">What kind of being does education presume the learner to be, and given that being, is education the formation of a person or the transmission of knowledge, toward what end, and on whose authority?</p>
   <div class="prose">
     <p>Every philosophy of education carries a picture of the human being, and that picture comes first. It decides what education is for, and the purpose then decides what is taught and who may teach it. Mencius and Xunzi disagree about the curriculum because they first disagree about human nature. So do Augustine and Pelagius, and Rousseau and the Church. The question is long because each clause depends on the one before it.</p>
@@ -187,10 +253,16 @@ dd.tr{font-size:14px;color:var(--muted)}
     <div><b>The teacher</b><p>Is a teacher necessary? What grounds the teacher's authority: lineage, attainment, revelation, reason, or the state?</p></div>
     <div><b>The strongest objection</b><p>Who presses hardest on this view, from inside the tradition or outside it?</p></div>
   </div>
-</section>
+      <div class="howto">
+        <p><b>How to read the atlas.</b> The contents on the left list every text. Choose one to read it here, then use <i>Next</i> at the bottom of the page, or the arrow keys, to move through the texts in order. On a phone, the contents open from the <i>Contents</i> button at the top.</p>
+        <p>The texts can be arranged by <b>tradition</b>, by the picture of the <b>learner</b> each assumes, or by <b>period</b>. Arranging changes only the order, never which texts are shown. The search box narrows the list until you clear it.</p>
+        <p>Each text ends with a reading you can edit. <a href="#readings">Your Readings</a> explains how to keep your changes.</p>
+      </div>
+    </article>
+    <article class="view" data-view="map" hidden>
+      <div class="eyebrow">Begin here</div>
+      <h1>What the Learner Is</h1>
 
-<section id="map">
-  <h2>What the Learner Is</h2>
   <p class="sub">Each tile is one text, placed in its tradition and coloured by the picture of the learner it assumes. Tap a tile to go to the text.</p>
   <div class="map">
     <div class="sorder" role="group" aria-label="Colour the tiles by"><span class="lab">Colour by</span><span id="cOrder" class="frow"></span></div>
@@ -198,48 +270,59 @@ dd.tr{font-size:14px;color:var(--muted)}
     <div class="legend" id="legend"></div>
     <p class="read" id="mapread"></p>
   </div>
-</section>
-
-<section id="traditions">
-  <h2>The Traditions</h2>
-  <p class="sub">A short account of each tradition's picture of the person and the argument that runs through it, so that the entries can be read in context.</p>
-  <div class="prose">
-    <h3>India: The Self Already There</h3>
+    </article>
+    <article class="view" data-view="on-india" hidden>
+      <div class="eyebrow">On the tradition</div>
+      <h1>India: The Self Already There</h1>
+      <div class="prose" style="margin-top:22px">
     <p>The Upanishads begin from a learner who is already, in principle, what he is to become. The self is identical with the ground of all things, and what stands in the way is ignorance, not incapacity. This explains the most striking move in the Indian material: the <i>Mundaka</i> classes the Vedas themselves as lower knowledge. Yet the institution built around those texts was one of the most transmission-heavy the world has known. Pupils lived in the teacher's household and memorized the Veda syllable by syllable, preserving it orally with extraordinary accuracy for three thousand years. The two fit together: memorization keeps the vessel intact, and a teacher in whom the knowledge is realized makes it live.</p>
     <p>Buddhism changes the person. There is no hidden self to recognize, only craving and ignorance to be dissolved, and the teaching is a raft to be left behind. The Nyāya logicians give India a theory of honest and dishonest debate. The <i>Gita</i> places teaching inside a crisis of action. Running through all of it is a tension that is the Indian form of the question of authority: a metaphysics of universal identity coexisted with institutions that restricted who could learn, by caste and by sex.</p>
-    <h3>China: Cultivating the Person</h3>
+      </div>
+    </article>
+    <article class="view" data-view="on-china" hidden>
+      <div class="eyebrow">On the tradition</div>
+      <h1>China: Cultivating the Person</h1>
+      <div class="prose" style="margin-top:22px">
     <p>Learning (<i>xue</i>) is the first word of the <i>Analects</i>, and no tradition makes it more central to being human. The Chinese debate about the person is also the clearest anywhere. Mencius says human nature is good, Xunzi that it is bad, Gaozi that it is neither, and each view brings its own curriculum: protect the sprouts, steam and bend the wood, or carve as one pleases. The Daoists dissent from learning as such and treat it as a loss of original simplicity.</p>
     <p>Two thousand years later, Neo-Confucianism relived the quarrel in other terms. Zhu Xi taught that one investigates principle in things and texts, and Lu Xiangshan and Wang Yangming that it is found in the heart. The institutions were academies (<i>shuyuan</i>) and, above all, the civil service examinations, which from the Sui dynasty to 1905 tied the cultivation of the self to selection by the state. For thirteen centuries China ran the largest experiment ever made in joining formation to an examination, and the results bear on every modern system of credentials.</p>
-    <h3>Islam: Knowledge, Adab and the Heart</h3>
+      </div>
+    </article>
+    <article class="view" data-view="on-islam" hidden>
+      <div class="eyebrow">On the tradition</div>
+      <h1>Islam: Knowledge, Adab and the Heart</h1>
+      <div class="prose" style="margin-top:22px">
     <p>The Islamic tradition has the richest vocabulary for the governing question: <i>ʿilm</i> (knowledge), <i>taʿlīm</i> (instruction), <i>tarbiya</i> (rearing), <i>taʾdīb</i> (formation in <i>adab</i>), and for the person <i>fiṭra</i> (the original disposition), <i>ʿaql</i> (intellect), <i>qalb</i> (heart) and <i>nafs</i> (the lower self). It also has two inheritances. One is prophetic and legal, carried by chains of transmission (<i>isnād</i>) and by the personal licence (<i>ijāza</i>) a teacher gives a student to teach a text. The other is Greek, received through Fārābī and Miskawayh, in which the person is a rational soul whose intellect must be actualized and whose natures differ, so that teaching must be graded. Ibn Rushd's three kinds of assent and Ibn Ṭufayl's solitary philosopher belong to that line.</p>
     <p>Al-Ghazālī joined the legal, theological and Sufi strands into a single account in which knowledge is for action and the heart is a mirror to be polished under a shaykh. The madrasa, spread by the Nizāmiyya colleges from 1067, gave the tradition its institution, and Zarnūjī's manual its student's handbook. Ibn Khaldūn then described the whole system as a craft that forms habits in a civilization, with a naturalism no other pre-modern tradition matched. The question of authority runs through the tradition in three forms: the chain of transmission, the dispute with the Taʿlīmiyya over an infallible teacher, and the philosophers' practice of writing in concealment.</p>
-    <h3>Judaism and Christianity: Study and the Inner Teacher</h3>
+      </div>
+    </article>
+    <article class="view" data-view="on-abr" hidden>
+      <div class="eyebrow">On the tradition</div>
+      <h1>Judaism and Christianity: Study and the Inner Teacher</h1>
+      <div class="prose" style="margin-top:22px">
     <p>These are two models, and neither simply follows the Islamic one. In the medieval period Maimonides, Ibn Rushd and Aquinas share Aristotle and read one another, and the questions of graded teaching and concealment are common to all three. But rabbinic Judaism made study itself a form of worship and argument a form of study. It handed down the Torah through a chain of teachers and paired every student with a companion. It preserved the losing opinion beside the winning one, as Islamic law preserved the disagreements of its schools.</p>
     <p>Christianity added a different problem. For Augustine the learner is fallen and the only true teacher is inward, so the question of the teacher becomes a question about grace. Monastic reading, Hugh of St Victor's restoration of the divine image, and Aquinas's teacher who assists nature as a doctor does are three answers to it. The universities of Paris and Bologna, born around 1200, are the institution that the modern section inherits.</p>
-    <h3>Greece and Rome: Habit and the Speaker</h3>
+      </div>
+    </article>
+    <article class="view" data-view="on-west" hidden>
+      <div class="eyebrow">On the tradition</div>
+      <h1>Greece and Rome: Habit and the Speaker</h1>
+      <div class="prose" style="margin-top:22px">
     <p>The Greek word for this whole subject, <i>paideia</i>, meant upbringing, culture and education at once. Two lines came out of Athens and still shape Western schooling. The philosophical line ran through Aristotle, for whom virtue is a habit completed by practical wisdom and education the business of the lawgiver. The rhetorical line ran from Isocrates to Quintilian, for whom the educated person is a good man skilled in speaking. The medieval liberal arts combined them, and Montaigne, at the edge of modernity, turned both toward the forming of judgment.</p>
-    <h3>Modernity: The Order Reversed</h3>
+      </div>
+    </article>
+    <article class="view" data-view="on-mod" hidden>
+      <div class="eyebrow">On the tradition</div>
+      <h1>Modernity: The Order Reversed</h1>
+      <div class="prose" style="margin-top:22px">
     <p>From Locke onward the learner is pictured either as blank paper or as a rational being who must grow into autonomy. Responsibility for formation passes from churches and households to the state, which begins to require schooling: Prussia's general school regulations of 1763 are an early landmark. The university justifies itself first by Humboldt's story of self-formation and then by the story of a people's emancipation. Weber expels formation from the lecture hall, and Lyotard reports that both stories have lost their hold and that knowledge is now judged by its performance.</p>
     <p>For the colonized world modernity arrived as Macaulay's Minute: an education designed for the needs of an empire, with a person assumed to fit them. In South Asia it produced the lasting split between madrasa and school that Sir Syed, Iqbal and Fazlur Rahman tried in different ways to heal. In its sharpest form the reversal is the doctrine of human capital, in which the economy sets the purpose of education and the learner is valued by his expected return. The responses that follow fall into three groups. Newman, al-Attas and MacIntyre return to formation within a tradition. Freire, Illich and Rancière seek emancipation from the teacher and the school. Arendt defends the teacher's authority as responsibility for an old world handed to newcomers. Ngũgĩ adds that all of this happens in a language, and asks whose.</p>
-  </div>
-</section>
+  
+      </div>
+    </article>
+    <article class="view" data-view="across" hidden>
+      <div class="eyebrow">Comparing</div>
+      <h1>Across the Traditions</h1>
 
-<section id="atlas" style="padding-bottom:0">
-  <h2>The Texts, One by One</h2>
-  <p class="sub">Each entry gives the passages to read, a free text online where one exists, a translation to look for, and the five questions. The coloured line marks the person; the strongest objection is set in red. Passage numbers follow the translation named, and some numbering differs between editions.</p>
-</section>
-
-<div class="filters" role="group" aria-label="Filter texts">
-  <div class="frow"><label class="lab" for="q">Find</label><input id="q" class="search" type="search" placeholder="Search texts, people, ideas: adab, habit, Mencius, memorization…" autocomplete="off"></div>
-  <div class="frow"><span class="lab">Tradition</span><span id="fTrad" class="frow"></span></div>
-  <div class="frow"><span class="lab">Learner</span><span id="fLearn" class="frow"></span></div>
-  <div class="frow"><span class="lab">Period</span><span id="fEra" class="frow"></span><span class="count" id="count"></span></div>
-</div>
-<div class="mbar" id="mbar"></div>
-<div class="entries" id="entries"></div>
-
-<section id="across">
-  <h2>Across the Traditions</h2>
   <p class="sub">The second pass. Each of the five questions in turn, with the traditions set against one another.</p>
   <div class="prose">
     <h3>The Person</h3>
@@ -255,29 +338,43 @@ dd.tr{font-size:14px;color:var(--muted)}
     <h3>The Recurring Quarrels</h3>
     <p>The same few disagreements reappear across centuries and traditions. Is the learner good or bad (Mencius against Xunzi, Pelagius against Augustine, Rousseau against the Church)? Is the truth found within or in things (Wang Yangming against Zhu Xi, Augustine against Aquinas)? Does philosophy outrank revelation (Fārābī and Ibn Rushd against al-Ghazālī; Maimonides against Judah Halevi)? Are natures graded or equal (Ibn Rushd against Rancière)? Should the university form the person or stay neutral (Newman and MacIntyre against Weber)? Should one enter a tradition or be emancipated from it (MacIntyre against Freire and Illich)? And in whose language should one learn (the Orientalists against Macaulay, Ngũgĩ against Achebe)? Knowing which of these quarrels a text belongs to is often the quickest way to understand it.</p>
   </div>
-</section>
+    </article>
+    <article class="view" data-view="unanswered" hidden>
+      <div class="eyebrow">Comparing</div>
+      <h1>What Remains Unanswered</h1>
 
-<section id="words">
-  <h2>Key Words</h2>
-  <p class="sub">Terms that recur in the entries, with the original word where it differs.</p>
-  <div class="words" id="wordlist"></div>
-</section>
-
-<section id="unanswered">
-  <h2>What Remains Unanswered</h2>
-  <div class="prose">
+  <div class="prose" style="margin-top:22px">
     <p>Every tradition says the deepest thing cannot be taught, and every tradition goes on teaching it. None explains how the presence of a teacher conveys what words cannot. Ibn Khaldūn comes closest when he says habits acquired through direct contact are firmer, and the <i>Katha</i> when it says the teaching must come from another. Zhuangzi's wheelwright learned his knack somehow, and the text does not say how.</p>
     <p>The question of equal or graded natures has never been settled by argument. The medieval philosophers assumed that most people need images and Rancière assumes that everyone has the same intelligence. Each assumption produces the evidence that seems to confirm it, because the learner treated as incapable often becomes so.</p>
     <p>Modernity has no agreed answer to the question of who sets the end of education once the state and the market do. Those who return to tradition presuppose a living community of practice that may no longer exist. Those who seek emancipation presuppose that the learner already has ends of his own. Arendt's answer, to hand on the world so that the new can renew it, works only where the world being handed on deserves to be kept.</p>
     <p>And Lyotard's prediction of 1979 has come true. If machines take over transmission, the half of the governing question that remains is the first one: what kind of being the learner is, and what a teacher can still form in him. The household, which appears in this atlas as the father teaching Śvetaketu, Mencius's advice that fathers should not teach their own sons, and the children Rousseau left at a foundling hospital, has never had a philosophy of its own, though most education still happens there.</p>
   </div>
-</section>
+    </article>
+    <article class="view" data-view="words" hidden>
+      <div class="eyebrow">Comparing</div>
+      <h1>Key Words</h1>
 
-<section class="note">
+  <p class="sub">Terms that recur in the entries, with the original word where it differs.</p>
+  <div class="words" id="wordlist"></div>
+    </article>
+    <article class="view" data-view="readings" hidden>
+      <div class="eyebrow">The atlas</div>
+      <h1>Your Readings</h1>
+      <p class="sub">Each text ends with a reading under your name. The readings live in the file <code>readings.js</code> in the repository. When you edit one on this page, the change is saved only in this browser. To keep it for good, copy the file here and replace <code>readings.js</code> on GitHub. You can also edit <code>readings.js</code> on GitHub directly.</p>
+      <div class="rform" id="rbox"></div>
+    </article>
+    <article class="view" data-view="about" hidden>
+      <div class="eyebrow">The atlas</div>
+      <h1>About This Atlas</h1>
+      <div class="note" style="margin-top:22px">
   <p><b>On selection and sources.</b> The entries were chosen to answer the governing question across traditions, not to be complete. Among those left out for length are the Ikhwān al-Ṣafāʾ, Shah Waliullah and the Deoband curriculum, Comenius, Pestalozzi, Froebel, Herbart and Montessori, Gandhi's Nai Talim as a separate entry, the Confucian traditions of Korea and Japan, and the oral traditions of Africa beyond Ngũgĩ. Arguments are paraphrased rather than quoted. Short phrases from ancient and medieval texts are close renderings, and the translations named in each entry should be preferred. The placement of each text among the seven pictures of the learner is an interpretation and is meant to be contested in the readings.</p>
   <p class="colophon">Compiled by <a href="https://mechanomorph.substack.com" target="_blank" rel="noopener">Asim D. Bakhshi</a> with Claude, Anthropic's AI model. Each <i>Reading</i> belongs to the reader named above it, and can be constantly evolved as you read, reflect and reread the texts.</p>
   <p>© 2026 <a href="https://mechanomorph.substack.com" target="_blank" rel="noopener">Asim D. Bakhshi</a>. Text and readings are licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons Attribution 4.0</a>; code under the MIT License. You may share and adapt this work with credit.</p>
-</section>
+
+      </div>
+    </article>
+    <article class="view" data-view="text" id="v-text" hidden></article>
+  </main>
 </div>
 
 <script src="readings.js"></script>
@@ -830,6 +927,7 @@ k:"The master of a practice, whose authority the apprentice must at first accept
 o:"Liberal critics, Martha Nussbaum among them, argue that his traditions are less open to criticism than he claims and that his account cannot protect individuals from their communities."}
 );
 
+
 const TRAD={india:"India",china:"China",islam:"Islam",abr:"Judaism and Christianity",west:"Greece and Rome",mod:"Modernity"};
 const LEARN={veiled:"Whole within, veiled",natural:"Good by nature",unformed:"Unformed, made by habit",wayward:"Wayward, to be straightened",bound:"Bound, to be released",free:"Free, to be emancipated",resource:"A resource for ends set elsewhere"};
 const LEAN={f:"Formation",t:"Transmission",b:"Holds both"};
@@ -868,70 +966,14 @@ const wiki=t=>"https://en.wikipedia.org/w/index.php?title=Special:Search&go=Go&s
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const strip_=x=>String(x).replace(/<[^>]+>/g," ");
 
-/* Map */
-let colourBy="learner";
-try{colourBy=localStorage.getItem("eduColour")||"learner"}catch(_){}
-function drawMap(){
-  const co=document.getElementById("cOrder");co.innerHTML="";
-  [["learner","The learner"],["lean","Formation or transmission"]].forEach(([k,l])=>{const c=document.createElement("button");c.className="chip";c.id="c-"+k;c.textContent=l;c.setAttribute("aria-pressed",String(colourBy===k));
-    c.onclick=()=>{colourBy=k;try{localStorage.setItem("eduColour",k)}catch(_){};drawMap()};co.appendChild(c)});
-  const col=d=>colourBy==="learner"?`var(--l-${d.l})`:`var(--f-${d.f})`;
-  document.getElementById("rows").innerHTML=Object.keys(TRAD).map(t=>`<div class="mrow"><div class="tl">${TRAD[t]}</div><div class="tiles">${E.filter(d=>d.t===t).map(d=>`<button class="tile" style="--c:${col(d)}" data-n="${esc(d.n)}" title="${esc(d.n)}: ${colourBy==="learner"?LEARN[d.l]:LEAN[d.f]}">${esc(short(d.n))}</button>`).join("")}</div></div>`).join("");
-  document.querySelectorAll("#rows .tile").forEach(b=>b.onclick=()=>goTo(b.dataset.n));
-  const items=colourBy==="learner"?Object.entries(LEARN).map(([k,v])=>[`var(--l-${k})`,v]):Object.entries(LEAN).map(([k,v])=>[`var(--f-${k})`,v]);
-  document.getElementById("legend").innerHTML=items.map(([c,v])=>`<span><i style="background:${c}"></i>${v}</span>`).join("");
-  document.getElementById("mapread").innerHTML=colourBy==="learner"
-    ?`Read across the rows and some patterns stand out. The learner made by habit is the most common picture, running from the <i>Analects</i> and Aristotle through Ibn Khaldūn and Aquinas to Locke and Dewey. The veiled self runs through the Upanishads, Augustine, al-Ghazālī, Zhu Xi and Wang Yangming; only two texts, Xunzi and the rabbis' two inclinations, start from a learner who must be straightened. The modern row is where the learner becomes free, and also where, for the first time, he becomes a resource. These placements are interpretations, and the readings are the place to dispute them.`
-    :`Coloured this way, formation leads in every period. Holding both halves together is common before modernity, in twelve of thirty-three texts, and rare after it, in three of twenty-one. Transmission alone appears where a text teaches by method or by scriptural sentence (the Nyāya Sūtra, Śaṅkara), grades its learners (the Lotus Sutra, Ibn Rushd), defends teaching as a real cause (Aquinas), or where modern institutions take over (Macaulay, Sir Syed's college, Weber, Lyotard).`;
-}
-drawMap();
 
-/* Entries */
-const state={t:"All",l:"All",era:"All",q:""};
-try{const v=JSON.parse(localStorage.getItem("eduF")||"null");if(v)Object.assign(state,v)}catch(_){}
-state.q="";
-function chips(host,key,opts,labels){host.innerHTML="";["All",...opts].forEach(o=>{const c=document.createElement("button");c.className="chip";c.id=`f-${key}-${slug(o)}`;
-  c.textContent=o==="All"?"All":(labels?labels[o]:o);c.setAttribute("aria-pressed",String(state[key]===o));
-  c.onclick=()=>{state[key]=o;save();render()};host.appendChild(c)})}
-function save(){try{localStorage.setItem("eduF",JSON.stringify(state))}catch(_){}}
-const hay=d=>strip_([d.n,d.by,d.d,d.read,d.tr,d.w,d.p,d.e,d.x,d.k,d.o,TRAD[d.t],LEARN[d.l],d.home||"",cur(d.n)].join(" ")).toLowerCase();
-function goTo(n){state.t="All";state.l="All";state.era="All";state.q="";const qi=document.getElementById("q");if(qi)qi.value="";save();render();const el=document.getElementById(slug(n));if(el){el.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"});el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}}
-function render(){
-  chips(document.getElementById("fTrad"),"t",Object.keys(TRAD),TRAD);
-  chips(document.getElementById("fLearn"),"l",Object.keys(LEARN),{veiled:"Veiled",natural:"Good by nature",unformed:"Unformed",wayward:"Wayward",bound:"Bound",free:"Free",resource:"Resource"});
-  chips(document.getElementById("fEra"),"era",ERAS);
-  let list=E.filter(d=>(state.t==="All"||d.t===state.t)&&(state.l==="All"||d.l===state.l)&&(state.era==="All"||d.era===state.era));
-  const q=(state.q||"").trim().toLowerCase();
-  if(q)list=list.filter(d=>hay(d).includes(q));
-  document.getElementById("count").textContent=`${list.length} of ${E.length}`;
-  const host=document.getElementById("entries");
-  host.innerHTML=list.length?list.map(d=>`
-  <article class="entry" id="${slug(d.n)}">
-    <div class="margin">
-      <span class="trad">${TRAD[d.t]}${d.home?" · "+d.home:""}</span>
-      <span class="dt">${d.d}</span>
-      <span class="pill" style="color:var(--l-${d.l})">${LEARN[d.l]}</span>
-      <span class="pill" style="color:var(--f-${d.f})">${LEAN[d.f]}</span>
-    </div>
-    <div style="min-width:0">
-      <h3><a href="${wiki(d.wk)}" target="_blank" rel="noopener" title="About this text">${d.n}</a></h3>
-      <p class="by">${d.by}</p>
-      <p class="rd"><b>Read</b>${d.read}${d.ol?`<span class="ol"><b>Online</b>${d.ol.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}</a>`).join("")}</span>`:""}</p>
-      <dl>
-        <dt>The work</dt><dd>${d.w}</dd>
-        <dt>The person</dt><dd class="person">${d.p}</dd>
-        <dt>The end</dt><dd>${d.e}</dd>
-        <dt>Passed on</dt><dd>${d.x}</dd>
-        <dt>The teacher</dt><dd>${d.k}</dd>
-        <dt>Objection</dt><dd class="obj">${d.o}</dd>
-        <dt>Translation</dt><dd class="tr">${d.tr}</dd>
-      </dl>
-      ${mineHTML(d.n)}
-    </div>
-  </article>`).join(""):`<p class="empty">${q?`Nothing matches “${esc(state.q)}”. Try a shorter word, or clear the search.`:`No text matches all three filters. Choose "All" in one row to widen the list.`}</p>`;
-  wireMine();renderBar();host.querySelectorAll(".entry").forEach(el=>linkify(el));
-}
-
+const TKEY=Object.keys(TRAD);
+const LPLAIN={veiled:"Whole within, veiled",natural:"Good by nature",unformed:"Unformed, made by habit",wayward:"Wayward, to be straightened",bound:"Bound, to be released",free:"Free, to be emancipated",resource:"A resource for ends set elsewhere"};
+const ESSAY={india:"India: The Self Already There",china:"China: Cultivating the Person",islam:"Islam: Knowledge, Adab and the Heart",abr:"Judaism and Christianity: Study and the Inner Teacher",west:"Greece and Rome: Habit and the Speaker",mod:"Modernity: The Order Reversed"};
+const BY_SLUG={};E.forEach(d=>{d.s=slug(d.n);BY_SLUG[d.s]=d});
+const TITLES={question:"The Governing Question",map:"What the Learner Is",across:"Across the Traditions",unanswered:"What Remains Unanswered",words:"Key Words",readings:"Your Readings",about:"About This Atlas"};
+TKEY.forEach(t=>TITLES["on-"+t]=ESSAY[t]);
+const OLD={atlas:null,traditions:"on-india"};
 
 const TERMS=[["Śaṅkara", "https://en.wikipedia.org/wiki/Adi_Shankara"], ["Rāmānuja", "https://en.wikipedia.org/wiki/Ramanuja"], ["Ambedkar", "https://en.wikipedia.org/wiki/B._R._Ambedkar"], ["Gandhi", "https://en.wikipedia.org/wiki/Mahatma_Gandhi"], ["Nāgārjuna", "https://en.wikipedia.org/wiki/Nagarjuna"], ["Mīmāṃsā", "https://en.wikipedia.org/wiki/Mimamsa"], ["Nyāya", "https://en.wikipedia.org/wiki/Nyaya"], ["Bhikkhu Bodhi", "https://en.wikipedia.org/wiki/Bhikkhu_Bodhi"], ["Kumārajīva", "https://en.wikipedia.org/wiki/Kumarajiva"], ["Mahāyāna", "https://en.wikipedia.org/wiki/Mahayana"], ["Mahābhārata", "https://en.wikipedia.org/wiki/Mahabharata"], ["Brahma Sūtra", "https://en.wikipedia.org/wiki/Brahma_Sutras"], ["Śāriputra", "https://en.wikipedia.org/wiki/Sariputta"], ["Ānanda", "https://en.wikipedia.org/wiki/Ananda"], ["Vedas", "https://en.wikipedia.org/wiki/Vedas"], ["Veda", "https://en.wikipedia.org/wiki/Vedas"], ["Upanishads", "https://en.wikipedia.org/wiki/Upanishads"], ["brahman", "https://en.wikipedia.org/wiki/Brahman"], ["ātman", "https://en.wikipedia.org/wiki/Ātman_(Hinduism)"], ["dharma", "https://en.wikipedia.org/wiki/Dharma"], ["mokṣa", "https://en.wikipedia.org/wiki/Moksha"], ["nibbāna", "https://en.wikipedia.org/wiki/Nirvana_(Buddhism)"], ["bhakti", "https://en.wikipedia.org/wiki/Bhakti"], ["guṇas", "https://en.wikipedia.org/wiki/Guṇa"], ["Yama", "https://en.wikipedia.org/wiki/Yama"], ["Confucius", "https://en.wikipedia.org/wiki/Confucius"], ["Mencius", "https://en.wikipedia.org/wiki/Mencius"], ["Xunzi", "https://en.wikipedia.org/wiki/Xunzi_(philosopher)"], ["Laozi", "https://en.wikipedia.org/wiki/Laozi"], ["Zhuangzi", "https://en.wikipedia.org/wiki/Zhuang_Zhou"], ["Gaozi", "https://en.wikipedia.org/wiki/Gaozi_(philosopher)"], ["Mohists", "https://en.wikipedia.org/wiki/Mohism"], ["Han Fei", "https://en.wikipedia.org/wiki/Han_Fei"], ["Li Si", "https://en.wikipedia.org/wiki/Li_Si"], ["Lu Xiangshan", "https://en.wikipedia.org/wiki/Lu_Jiuyuan"], ["Gu Yanwu", "https://en.wikipedia.org/wiki/Gu_Yanwu"], ["Luo Qinshun", "https://en.wikipedia.org/wiki/Luo_Qinshun"], ["Zhu Xi", "https://en.wikipedia.org/wiki/Zhu_Xi"], ["Wang Yangming", "https://en.wikipedia.org/wiki/Wang_Yangming"], ["Neo-Confucianism", "https://en.wikipedia.org/wiki/Neo-Confucianism"], ["Legalism", "https://en.wikipedia.org/wiki/Legalism_(Chinese_philosophy)"], ["Book of Documents", "https://en.wikipedia.org/wiki/Book_of_Documents"], ["Great Learning", "https://en.wikipedia.org/wiki/Great_Learning"], ["Doctrine of the Mean", "https://en.wikipedia.org/wiki/Doctrine_of_the_Mean"], ["Four Books", "https://en.wikipedia.org/wiki/Four_Books_and_Five_Classics"], ["civil service examinations", "https://en.wikipedia.org/wiki/Imperial_examination"], ["Yao", "https://en.wikipedia.org/wiki/Emperor_Yao"], ["Shun", "https://en.wikipedia.org/wiki/Emperor_Shun"], ["Yu", "https://en.wikipedia.org/wiki/Yu_the_Great"], ["Duke Huan", "https://en.wikipedia.org/wiki/Duke_Huan_of_Qi"], ["Yan Hui", "https://en.wikipedia.org/wiki/Yan_Hui"], ["Fārābī", "https://en.wikipedia.org/wiki/Al-Farabi"], ["Miskawayh", "https://en.wikipedia.org/wiki/Ibn_Miskawayh"], ["al-Ghazālī", "https://en.wikipedia.org/wiki/Al-Ghazali"], ["Al-Ghazālī", "https://en.wikipedia.org/wiki/Al-Ghazali"], ["Ibn Rushd", "https://en.wikipedia.org/wiki/Averroes"], ["Ibn Ṭufayl", "https://en.wikipedia.org/wiki/Ibn_Tufail"], ["Ibn Khaldūn", "https://en.wikipedia.org/wiki/Ibn_Khaldun"], ["Ibn al-Nafīs", "https://en.wikipedia.org/wiki/Ibn_al-Nafis"], ["Zarnūjī", "https://en.wikipedia.org/wiki/Burhan_al-Din_al-Zarnuji"], ["Abū Ḥanīfa", "https://en.wikipedia.org/wiki/Abu_Hanifa"], ["Galen", "https://en.wikipedia.org/wiki/Galen"], ["Active Intellect", "https://en.wikipedia.org/wiki/Active_intellect"], ["Incoherence of the Philosophers", "https://en.wikipedia.org/wiki/The_Incoherence_of_the_Philosophers"], ["Incoherence of the Incoherence", "https://en.wikipedia.org/wiki/The_Incoherence_of_the_Incoherence"], ["Taʿlīmiyya", "https://en.wikipedia.org/wiki/Batiniyya"], ["Sufis", "https://en.wikipedia.org/wiki/Sufism"], ["Edward Pococke", "https://en.wikipedia.org/wiki/Edward_Pococke"], ["Leo Strauss", "https://en.wikipedia.org/wiki/Leo_Strauss"], ["Nizāmiyya", "https://en.wikipedia.org/wiki/Nizamiyya"], ["madrasa", "https://en.wikipedia.org/wiki/Madrasa"], ["fiṭra", "https://en.wikipedia.org/wiki/Fitra"], ["taqlīd", "https://en.wikipedia.org/wiki/Taqlid"], ["ijāza", "https://en.wikipedia.org/wiki/Ijazah"], ["isnād", "https://en.wikipedia.org/wiki/Isnad"], ["ʿulamāʾ", "https://en.wikipedia.org/wiki/Ulama"], ["Dars-i Nizami", "https://en.wikipedia.org/wiki/Dars-e-Nizami"], ["Ijtihad", "https://en.wikipedia.org/wiki/Ijtihad"], ["Moses", "https://en.wikipedia.org/wiki/Moses"], ["Mishnah", "https://en.wikipedia.org/wiki/Mishnah"], ["Talmud", "https://en.wikipedia.org/wiki/Talmud"], ["Torah", "https://en.wikipedia.org/wiki/Torah"], ["Great Assembly", "https://en.wikipedia.org/wiki/Great_Assembly"], ["Hillel", "https://en.wikipedia.org/wiki/Hillel_the_Elder"], ["Shammai", "https://en.wikipedia.org/wiki/Shammai"], ["Elisha ben Abuya", "https://en.wikipedia.org/wiki/Elisha_ben_Abuyah"], ["Rabbi Meir", "https://en.wikipedia.org/wiki/Rabbi_Meir"], ["Judah Halevi", "https://en.wikipedia.org/wiki/Judah_Halevi"], ["Kuzari", "https://en.wikipedia.org/wiki/Kuzari"], ["Adeodatus", "https://en.wikipedia.org/wiki/Adeodatus"], ["Bonaventure", "https://en.wikipedia.org/wiki/Bonaventure"], ["Pelagius", "https://en.wikipedia.org/wiki/Pelagius"], ["Augustine", "https://en.wikipedia.org/wiki/Augustine_of_Hippo"], ["Aquinas", "https://en.wikipedia.org/wiki/Thomas_Aquinas"], ["Maimonides", "https://en.wikipedia.org/wiki/Maimonides"], ["Hugh of St Victor", "https://en.wikipedia.org/wiki/Hugh_of_Saint_Victor"], ["Virgil", "https://en.wikipedia.org/wiki/Virgil"], ["Plato", "https://en.wikipedia.org/wiki/Plato"], ["Aristotle", "https://en.wikipedia.org/wiki/Aristotle"], ["Isocrates", "https://en.wikipedia.org/wiki/Isocrates"], ["Quintilian", "https://en.wikipedia.org/wiki/Quintilian"], ["Cato", "https://en.wikipedia.org/wiki/Cato_the_Elder"], ["phronesis", "https://en.wikipedia.org/wiki/Phronesis"], ["eudaimonia", "https://en.wikipedia.org/wiki/Eudaimonia"], ["hexis", "https://en.wikipedia.org/wiki/Hexis"], ["liberal arts", "https://en.wikipedia.org/wiki/Liberal_arts_education"], ["Montaigne", "https://en.wikipedia.org/wiki/Michel_de_Montaigne"], ["Pascal", "https://en.wikipedia.org/wiki/Blaise_Pascal"], ["Locke", "https://en.wikipedia.org/wiki/John_Locke"], ["Leibniz", "https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz"], ["Rousseau", "https://en.wikipedia.org/wiki/Jean-Jacques_Rousseau"], ["Mary Wollstonecraft", "https://en.wikipedia.org/wiki/Mary_Wollstonecraft"], ["Robinson Crusoe", "https://en.wikipedia.org/wiki/Robinson_Crusoe"], ["Kant", "https://en.wikipedia.org/wiki/Immanuel_Kant"], ["Hamann", "https://en.wikipedia.org/wiki/Johann_Georg_Hamann"], ["Basedow", "https://en.wikipedia.org/wiki/Johann_Bernhard_Basedow"], ["Hegel", "https://en.wikipedia.org/wiki/Georg_Wilhelm_Friedrich_Hegel"], ["Humboldt", "https://en.wikipedia.org/wiki/Wilhelm_von_Humboldt"], ["John Stuart Mill", "https://en.wikipedia.org/wiki/John_Stuart_Mill"], ["On Liberty", "https://en.wikipedia.org/wiki/On_Liberty"], ["University of Berlin", "https://en.wikipedia.org/wiki/Humboldt_University_of_Berlin"], ["Bentinck", "https://en.wikipedia.org/wiki/Lord_William_Bentinck"], ["Deoband", "https://en.wikipedia.org/wiki/Darul_Uloom_Deoband"], ["Jamāl al-Dīn al-Afghānī", "https://en.wikipedia.org/wiki/Jamal_al-Din_al-Afghani"], ["Akbar Allahabadi", "https://en.wikipedia.org/wiki/Akbar_Allahabadi"], ["Aligarh", "https://en.wikipedia.org/wiki/Aligarh_Muslim_University"], ["Newman", "https://en.wikipedia.org/wiki/John_Henry_Newman"], ["Nietzsche", "https://en.wikipedia.org/wiki/Friedrich_Nietzsche"], ["Schopenhauer", "https://en.wikipedia.org/wiki/Arthur_Schopenhauer"], ["Zarathustra", "https://en.wikipedia.org/wiki/Thus_Spoke_Zarathustra"], ["Weber", "https://en.wikipedia.org/wiki/Max_Weber"], ["Tolstoy", "https://en.wikipedia.org/wiki/Leo_Tolstoy"], ["disenchantment", "https://en.wikipedia.org/wiki/Disenchantment"], ["Dewey", "https://en.wikipedia.org/wiki/John_Dewey"], ["Peirce", "https://en.wikipedia.org/wiki/Charles_Sanders_Peirce"], ["Hu Shih", "https://en.wikipedia.org/wiki/Hu_Shih"], ["Robert Maynard Hutchins", "https://en.wikipedia.org/wiki/Robert_Maynard_Hutchins"], ["Tagore", "https://en.wikipedia.org/wiki/Rabindranath_Tagore"], ["Santiniketan", "https://en.wikipedia.org/wiki/Santiniketan"], ["Visva-Bharati", "https://en.wikipedia.org/wiki/Visva-Bharati_University"], ["Nai Talim", "https://en.wikipedia.org/wiki/Nai_Talim"], ["Hind Swaraj", "https://en.wikipedia.org/wiki/Hind_Swaraj_or_Indian_Home_Rule"], ["Iqbal", "https://en.wikipedia.org/wiki/Muhammad_Iqbal"], ["Rumi", "https://en.wikipedia.org/wiki/Rumi"], ["Bergson", "https://en.wikipedia.org/wiki/Henri_Bergson"], ["Asrar", "https://en.wikipedia.org/wiki/Asrar-e-Khudi"], ["Arendt", "https://en.wikipedia.org/wiki/Hannah_Arendt"], ["Ralph Ellison", "https://en.wikipedia.org/wiki/Ralph_Ellison"], ["Freire", "https://en.wikipedia.org/wiki/Paulo_Freire"], ["Peter Berger", "https://en.wikipedia.org/wiki/Peter_L._Berger"], ["Illich", "https://en.wikipedia.org/wiki/Ivan_Illich"], ["Herbert Gintis", "https://en.wikipedia.org/wiki/Herbert_Gintis"], ["Rancière", "https://en.wikipedia.org/wiki/Jacques_Rancière"], ["Jacotot", "https://en.wikipedia.org/wiki/Joseph_Jacotot"], ["Fénelon", "https://en.wikipedia.org/wiki/François_Fénelon"], ["Lyotard", "https://en.wikipedia.org/wiki/Jean-François_Lyotard"], ["Habermas", "https://en.wikipedia.org/wiki/Jürgen_Habermas"], ["Fazlur Rahman", "https://en.wikipedia.org/wiki/Fazlur_Rahman_Malik"], ["al-Attas", "https://en.wikipedia.org/wiki/Syed_Muhammad_Naquib_al-Attas"], ["Al-Attas", "https://en.wikipedia.org/wiki/Syed_Muhammad_Naquib_al-Attas"], ["Ngũgĩ", "https://en.wikipedia.org/wiki/Ngũgĩ_wa_Thiong'o"], ["Chinua Achebe", "https://en.wikipedia.org/wiki/Chinua_Achebe"], ["Achebe", "https://en.wikipedia.org/wiki/Chinua_Achebe"], ["MacIntyre", "https://en.wikipedia.org/wiki/Alasdair_MacIntyre"], ["Martha Nussbaum", "https://en.wikipedia.org/wiki/Martha_Nussbaum"], ["Nussbaum", "https://en.wikipedia.org/wiki/Martha_Nussbaum"], ["Macaulay", "https://en.wikipedia.org/wiki/Thomas_Babington_Macaulay"], ["Sir Syed", "https://en.wikipedia.org/wiki/Syed_Ahmad_Khan"], ["Bildung", "https://en.wikipedia.org/wiki/Bildung"], ["human capital", "https://en.wikipedia.org/wiki/Human_capital"], ["banking", "https://en.wikipedia.org/wiki/Banking_model_of_education"], ["natality", "https://en.wikipedia.org/wiki/Natality"], ["Prussia", "https://en.wikipedia.org/wiki/Kingdom_of_Prussia"], ["Kalām", "https://en.wikipedia.org/wiki/Kalam"], ["theologians", "https://en.wikipedia.org/wiki/Kalam"], ["Mādhyamika", "https://en.wikipedia.org/wiki/Madhyamaka"], ["Edinburgh Review", "https://en.wikipedia.org/wiki/Edinburgh_Review"], ["Untimely Meditations", "https://en.wikipedia.org/wiki/Untimely_Meditations"]].sort((a,b)=>b[0].length-a[0].length);
 const TRE=new RegExp("(^|[^\\p{L}])("+TERMS.map(t=>t[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}])","u");
@@ -951,65 +993,199 @@ function linkify(root){
   });
 }
 
+
+
 /* Readings: base text from readings.js, local edits on top */
 const BASE=Object.assign({},window.READINGS||{});
 const AUTHOR=(window.READINGS_AUTHOR||"").trim();
 let NAME=AUTHOR;try{const v=localStorage.getItem("eduName");if(v!==null)NAME=v}catch(_){}
 const poss=n=>n?(/s$/i.test(n)?n+"’":n+"’s")+" Reading":"My Reading";
 let LOCAL={};try{LOCAL=JSON.parse(localStorage.getItem("eduReadings")||"{}")||{}}catch(_){LOCAL={}}
-const editing=new Set();
 const cur=n=>(n in LOCAL)?LOCAL[n]:(BASE[n]||"");
 const isLocal=n=>(n in LOCAL)&&LOCAL[n]!==(BASE[n]||"");
 function saveLocal(){try{localStorage.setItem("eduReadings",JSON.stringify(LOCAL))}catch(_){}}
+let editing=false;
+
+/* Arrangement of the texts */
+let arr="tradition";try{arr=localStorage.getItem("eduArr")||"tradition"}catch(_){}
+if(!["tradition","learner","period"].includes(arr))arr="tradition";
+let query="";
+const ERA_ORDER=d=>ERAS.indexOf(d.era);
+function groups(){
+  if(arr==="tradition")return TKEY.map(t=>({k:t,label:TRAD[t],items:E.filter(d=>d.t===t)}));
+  if(arr==="learner")return Object.keys(LEARN).map(l=>({k:l,label:LPLAIN[l],items:E.filter(d=>d.l===l)}));
+  return ERAS.map(e=>({k:e,label:e,items:E.filter(d=>d.era===e)}));
+}
+const ordered=()=>groups().flatMap(g=>g.items.map(d=>({d,g})));
+const hay=d=>strip_([d.n,d.by,d.d,d.read,d.tr,d.w,d.p,d.e,d.x,d.k,d.o,TRAD[d.t],LEARN[d.l],d.home||"",cur(d.n)].join(" ")).toLowerCase();
+const dot=d=>`style="--c:var(--l-${d.l})"`;
+
+function drawList(){
+  document.querySelectorAll(".seg button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.a===arr)));
+  const q=query.trim().toLowerCase();
+  let shown=0;
+  const html=groups().map(g=>{
+    const items=q?g.items.filter(d=>hay(d).includes(q)):g.items;
+    shown+=items.length;
+    if(!items.length)return "";
+    const essay=arr==="tradition"&&!q?`<a class="it essay plain" href="#on-${g.k}">On the tradition</a>`:"";
+    return `<div class="gh"><span>${esc(g.label)}</span><span>${items.length}</span></div>${essay}${items.map(d=>`<a class="it" href="#${d.s}"><i ${dot(d)}></i><span>${esc(d.n)}</span></a>`).join("")}`;
+  }).join("");
+  document.getElementById("tlist").innerHTML=html||`<p class="nohit">No text matches “${esc(query)}”.</p>`;
+  document.getElementById("tcount").innerHTML=q?`${shown} of ${E.length} texts match`:`${E.length} texts by ${arr}. Dots mark the <a href="#map">learner</a>.`;
+  document.getElementById("qclear").hidden=!q;
+  markCurrent(false);
+}
+
+/* Views */
+let VIEW="question";
+function markCurrent(scroll){
+  let cur_=null;
+  document.querySelectorAll(".side a.it").forEach(a=>{const on=a.getAttribute("href")==="#"+VIEW;if(on){a.setAttribute("aria-current","page");cur_=a}else a.removeAttribute("aria-current")});
+  if(scroll&&cur_){const s=document.getElementById("side");const r=cur_.getBoundingClientRect(),sr=s.getBoundingClientRect();if(r.top<sr.top+60||r.bottom>sr.bottom-20)cur_.scrollIntoView({block:"center"})}
+}
+function textView(d){
+  const list=ordered();const i=list.findIndex(x=>x.d===d);
+  const g=list[i].g;const inG=g.items.indexOf(d)+1;
+  const prev=list[i-1],next=list[i+1];
+  const ol=d.ol?`<p class="ol"><b>Online</b>${d.ol.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${l}</a>`).join("")}</p>`:"";
+  return `
+    <div class="crumb"><a href="#on-${d.t}">${TRAD[d.t]}${d.home?" · "+d.home:""}</a><span>${d.d}</span><span>${arr==="tradition"?`${inG} of ${g.items.length} in ${TRAD[d.t]}`:`${esc(g.label)} · ${inG} of ${g.items.length}`}</span></div>
+    <h1><a href="${wiki(d.wk)}" target="_blank" rel="noopener" title="About this text" style="text-decoration-color:var(--rule)">${d.n}</a></h1>
+    <p class="by">${d.by}</p>
+    <div class="pills"><span class="pill" style="color:var(--l-${d.l})">${LEARN[d.l]}</span><span class="pill" style="color:var(--f-${d.f})">${LEAN[d.f]}</span></div>
+    <div class="rd"><p><b>Read</b>${d.read}</p>${ol}<p><b>Translation</b>${d.tr}</p></div>
+    <dl>
+      <dt>The work</dt><dd>${d.w}</dd>
+      <dt>The person</dt><dd class="person">${d.p}</dd>
+      <dt>The end</dt><dd>${d.e}</dd>
+      <dt>Passed on</dt><dd>${d.x}</dd>
+      <dt>The teacher</dt><dd>${d.k}</dd>
+      <dt>Objection</dt><dd class="obj">${d.o}</dd>
+    </dl>
+    <div id="mine">${mineHTML(d.n)}</div>
+    <nav class="pager" aria-label="Previous and next text">
+      ${prev?`<a class="prev" href="#${prev.d.s}"><span>← Previous</span><b>${prev.d.n}</b></a>`:""}
+      ${next?`<a class="next" href="#${next.d.s}"><span>Next →</span><b>${next.d.n}</b></a>`:""}
+    </nav>`;
+}
 function mineHTML(n){
-  const id=slug(n),t=cur(n);
-  if(editing.has(n))return `<div class="mine"><div class="hd"><b>${esc(poss(NAME))}</b></div>
-    <label for="rd-${id}" hidden>${esc(poss(NAME))} of ${esc(n)}</label>
-    <textarea id="rd-${id}" data-n="${esc(n)}">${esc(t)}</textarea>
-    <div class="btns"><button class="btn pri" data-act="save" data-n="${esc(n)}">Save</button><button class="btn" data-act="cancel" data-n="${esc(n)}">Cancel</button></div></div>`;
+  const t=cur(n);
+  if(editing)return `<div class="mine"><div class="hd"><b>${esc(poss(NAME))}</b></div>
+    <label for="rdtxt" hidden>${esc(poss(NAME))} of ${esc(n)}</label>
+    <textarea id="rdtxt">${esc(t)}</textarea>
+    <div class="btns"><button class="btn pri" data-act="save">Save</button><button class="btn" data-act="cancel">Cancel</button><span class="hint">A blank line starts a new paragraph.</span></div></div>`;
   const paras=t.trim()?t.trim().split(/\n\s*\n/).map(p=>`<p>${esc(p)}</p>`).join(""):"<p>No reading yet.</p>";
   return `<div class="mine"><div class="hd"><b>${esc(poss(NAME))}</b>${isLocal(n)?`<span class="local">edited on this device</span>`:""}</div>
     <div class="txt${t.trim()?"":" empty"}">${paras}</div>
-    <div class="btns"><button class="btn" data-act="edit" data-n="${esc(n)}">Edit</button>${isLocal(n)?`<button class="btn" data-act="revert" data-n="${esc(n)}">Revert to file</button>`:""}</div></div>`;
+    <div class="btns"><button class="btn" data-act="edit">Edit</button>${isLocal(n)?`<button class="btn" data-act="revert">Revert to file</button><span class="hint">Saved in this browser only. <a href="#readings">Copy readings.js</a> to keep it.</span>`:""}</div></div>`;
 }
-function wireMine(){
-  document.querySelectorAll(".mine .btn").forEach(b=>b.onclick=()=>{
-    const n=b.dataset.n,a=b.dataset.act;
-    if(a==="edit"){editing.add(n);render();document.getElementById("rd-"+slug(n))?.focus();return}
-    if(a==="cancel"){editing.delete(n)}
-    if(a==="save"){const v=document.getElementById("rd-"+slug(n)).value;if(v===(BASE[n]||""))delete LOCAL[n];else LOCAL[n]=v;saveLocal();editing.delete(n)}
+function wireMine(n){
+  const box=document.getElementById("mine");
+  box.querySelectorAll(".btn").forEach(b=>b.onclick=()=>{
+    const a=b.dataset.act;
+    if(a==="edit")editing=true;
+    if(a==="cancel")editing=false;
+    if(a==="save"){const v=document.getElementById("rdtxt").value;if(v===(BASE[n]||""))delete LOCAL[n];else LOCAL[n]=v;saveLocal();editing=false}
     if(a==="revert"){delete LOCAL[n];saveLocal()}
-    render();
+    box.innerHTML=mineHTML(n);wireMine(n);
+    if(a==="edit")document.getElementById("rdtxt")?.focus();
   });
 }
+
+function show(id,{scroll=true}={}){
+  if(id in OLD)id=OLD[id]||ordered()[0].d.s;
+  if(!(id in BY_SLUG)&&!document.querySelector(`.view[data-view="${CSS.escape(id)}"]`))id="question";
+  VIEW=id;editing=false;
+  document.querySelectorAll(".view").forEach(v=>v.hidden=true);
+  let title;
+  if(id in BY_SLUG){
+    const d=BY_SLUG[id];const v=document.getElementById("v-text");
+    v.innerHTML=textView(d);v.hidden=false;wireMine(d.n);
+    v.querySelectorAll("dl, .by, .rd p:first-child").forEach(el=>linkify(el));
+    title=d.n;
+  }else{
+    const v=document.querySelector(`.view[data-view="${id}"]`);v.hidden=false;
+    if(id==="readings")drawReadings();
+    title=TITLES[id];
+  }
+  document.getElementById("where").textContent=title;
+  document.title=(id==="question"?"":title+" · ")+"Atlas of Educational Philosophy";
+  closeMenu();markCurrent(true);
+  if(scroll)window.scrollTo(0,0);
+}
+function route(){show(decodeURIComponent(location.hash.slice(1))||"question")}
+window.addEventListener("hashchange",route);
+
+/* Essays: list each tradition's texts beneath it */
+TKEY.forEach(t=>{const v=document.querySelector(`.view[data-view="on-${t}"]`);if(!v)return;
+  v.insertAdjacentHTML("beforeend",`<div class="listin"><span class="lab">Texts in this tradition</span><ul>${E.filter(d=>d.t===t).map(d=>`<li><i ${dot(d)}></i><div><a href="#${d.s}">${d.n}</a> <span>${d.d}</span></div></li>`).join("")}</ul></div>`)});
+
+/* Map */
+let colourBy="learner";
+try{colourBy=localStorage.getItem("eduColour")||"learner"}catch(_){}
+function drawMap(){
+  const co=document.getElementById("cOrder");co.innerHTML="";
+  [["learner","The learner"],["lean","Formation or transmission"]].forEach(([k,l])=>{const c=document.createElement("button");c.className="chip";c.id="c-"+k;c.textContent=l;c.setAttribute("aria-pressed",String(colourBy===k));
+    c.onclick=()=>{colourBy=k;try{localStorage.setItem("eduColour",k)}catch(_){};drawMap()};co.appendChild(c)});
+  const col=d=>colourBy==="learner"?`var(--l-${d.l})`:`var(--f-${d.f})`;
+  document.getElementById("rows").innerHTML=Object.keys(TRAD).map(t=>`<div class="mrow"><div class="tl">${TRAD[t]}</div><div class="tiles">${E.filter(d=>d.t===t).map(d=>`<button class="tile" style="--c:${col(d)}" data-n="${esc(d.n)}" title="${esc(d.n)}: ${colourBy==="learner"?LEARN[d.l]:LEAN[d.f]}">${esc(short(d.n))}</button>`).join("")}</div></div>`).join("");
+  document.querySelectorAll("#rows .tile").forEach(b=>b.onclick=()=>location.hash=slug(b.dataset.n));
+  const items=colourBy==="learner"?Object.entries(LEARN).map(([k,v])=>[`var(--l-${k})`,v]):Object.entries(LEAN).map(([k,v])=>[`var(--f-${k})`,v]);
+  document.getElementById("legend").innerHTML=items.map(([c,v])=>`<span><i style="background:${c}"></i>${v}</span>`).join("");
+  document.getElementById("mapread").innerHTML=colourBy==="learner"
+    ?`Read across the rows and some patterns stand out. The learner made by habit is the most common picture, running from the <i>Analects</i> and Aristotle through Ibn Khaldūn and Aquinas to Locke and Dewey. The veiled self runs through the Upanishads, Augustine, al-Ghazālī, Zhu Xi and Wang Yangming; only two texts, Xunzi and the rabbis' two inclinations, start from a learner who must be straightened. The modern row is where the learner becomes free, and also where, for the first time, he becomes a resource. These placements are interpretations, and the readings are the place to dispute them.`
+    :`Coloured this way, formation leads in every period. Holding both halves together is common before modernity, in twelve of thirty-three texts, and rare after it, in three of twenty-one. Transmission alone appears where a text teaches by method or by scriptural sentence (the Nyāya Sūtra, Śaṅkara), grades its learners (the Lotus Sutra, Ibn Rushd), defends teaching as a real cause (Aquinas), or where modern institutions take over (Macaulay, Sir Syed's college, Weber, Lyotard).`;
+}
+drawMap();
+
+/* Your readings page */
 function fileText(){
   const bt=s=>"`"+String(s).replace(/\\/g,"\\\\").replace(/`/g,"\\`").replace(/\$\{/g,"\\${")+"`";
   const lines=E.map(d=>`  ${JSON.stringify(d.n)}: ${bt(cur(d.n))},`).join("\n\n");
   return `// READINGS: the one part of the atlas that is the reader's own opinion.\n// READINGS_AUTHOR is the name shown above each reading ("Bakhshi" shows as "Bakhshi’s Reading").\n// Edit the text between the backticks. A blank line starts a new paragraph.\n// Keep the entry names exactly as they are.\n\nwindow.READINGS_AUTHOR = ${bt(NAME)};\n\nwindow.READINGS = {\n${lines}\n};\n`;
 }
-let showFile=false;
-function renderBar(){
-  const k=E.filter(d=>isLocal(d.n)).length+(NAME!==AUTHOR?1:0);
-  const bar=document.getElementById("mbar");
-  bar.innerHTML=`<label for="rname" class="lab">Reader</label><input id="rname" class="search" style="flex:0 1 220px" value="${esc(NAME)}" placeholder="Your name" autocomplete="off">
-    <span>${k?`You have changes on this device. To make them permanent, copy the file and replace <code>readings.js</code> in the repository.`:`The readings come from <code>readings.js</code>. Changes you make here, including your name, stay on this device until you copy them into that file.`}</span>
-    <span class="btns"><button class="btn" id="cpy">Copy readings.js</button>${k?`<button class="btn" id="dsc">Discard local edits</button>`:""}</span>
+let showFile=false,sure=false;
+function drawReadings(){
+  const edited=E.filter(d=>isLocal(d.n));
+  const k=edited.length+(NAME!==AUTHOR?1:0);
+  document.getElementById("rbox").innerHTML=`
+    <div class="row"><label for="rname" class="lab">Your name</label><input id="rname" class="search" style="flex:0 1 240px" value="${esc(NAME)}" placeholder="Your name" autocomplete="off"></div>
+    <p>${k?`You have changed ${edited.length===1?"one reading":edited.length+" readings"}${NAME!==AUTHOR?(edited.length?" and your name":"your name"):""} in this browser. To keep the changes, copy the file and replace <code>readings.js</code> in the repository.`:`Nothing has been changed in this browser. The readings shown come from <code>readings.js</code> in the repository.`}</p>
+    ${edited.length?`<ul>${edited.map(d=>`<li><a href="#${d.s}">${d.n}</a></li>`).join("")}</ul>`:""}
+    <div class="btns"><button class="btn pri" id="cpy">Copy readings.js</button>${k?`<button class="btn" id="dsc">${sure?"Click again to discard":"Discard changes in this browser"}</button>`:""}</div>
     ${showFile?`<textarea id="filetxt" readonly aria-label="readings.js contents">${esc(fileText())}</textarea>`:""}`;
   document.getElementById("cpy").onclick=e=>{
     const txt=fileText(),btn=e.currentTarget;
-    const fallback=()=>{showFile=true;renderBar();const ta=document.getElementById("filetxt");ta.focus();ta.select()};
+    const fallback=()=>{showFile=true;drawReadings();const ta=document.getElementById("filetxt");ta.focus();ta.select()};
     try{navigator.clipboard.writeText(txt).then(()=>{btn.textContent="Copied";setTimeout(()=>{btn.textContent="Copy readings.js"},1600)},fallback)}catch(_){fallback()}
   };
-  const d=document.getElementById("dsc");if(d)d.onclick=()=>{if(d.dataset.sure){LOCAL={};saveLocal();NAME=AUTHOR;try{localStorage.removeItem("eduName")}catch(_){};render()}else{d.dataset.sure="1";d.textContent="Click again to discard"}};
-  const rn=document.getElementById("rname");rn.onchange=()=>{NAME=rn.value.trim();try{if(NAME===AUTHOR)localStorage.removeItem("eduName");else localStorage.setItem("eduName",NAME)}catch(_){};render()};
+  const d=document.getElementById("dsc");if(d)d.onclick=()=>{if(sure){LOCAL={};saveLocal();NAME=AUTHOR;try{localStorage.removeItem("eduName")}catch(_){};sure=false}else sure=true;drawReadings()};
+  const rn=document.getElementById("rname");rn.onchange=()=>{NAME=rn.value.trim();try{if(NAME===AUTHOR)localStorage.removeItem("eduName");else localStorage.setItem("eduName",NAME)}catch(_){};drawReadings()};
   rn.onkeydown=e=>{if(e.key==="Enter")rn.blur()};
 }
 
-document.querySelectorAll("#question .prose, #traditions .prose p, #across .prose p, #unanswered .prose p, .note p:first-child").forEach(el=>linkify(el));
+/* Words */
 document.getElementById("wordlist").innerHTML=WORDS.map(([w,s,o,def])=>`<div class="word"><h4>${w}${s?`<span class="s">${s}</span>`:""}<span class="o">${o}</span></h4><p>${def}</p></div>`).join("");
+document.querySelectorAll(".view .prose p, .view .note p:first-child").forEach(el=>linkify(el));
 
+/* Controls */
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{arr=b.dataset.a;try{localStorage.setItem("eduArr",arr)}catch(_){};drawList();if(VIEW in BY_SLUG)show(VIEW,{scroll:false})});
 const qi=document.getElementById("q");
-qi.addEventListener("input",()=>{state.q=qi.value;render()});
-qi.addEventListener("keydown",e=>{if(e.key==="Enter"){const f=document.querySelector("#entries .entry");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})}if(e.key==="Escape"){qi.value="";state.q="";render()}});
-render();
+qi.addEventListener("input",()=>{query=qi.value;drawList()});
+qi.addEventListener("keydown",e=>{if(e.key==="Enter"){const f=document.querySelector("#tlist a.it:not(.essay)");if(f)location.hash=f.getAttribute("href")}if(e.key==="Escape"){qi.value="";query="";drawList()}});
+document.getElementById("qclear").onclick=()=>{qi.value="";query="";drawList();qi.focus()};
+const menu=document.getElementById("menu");
+function closeMenu(){document.body.classList.remove("open");menu.setAttribute("aria-expanded","false")}
+menu.onclick=()=>{const o=!document.body.classList.contains("open");document.body.classList.toggle("open",o);menu.setAttribute("aria-expanded",String(o));if(o)markCurrent(true)};
+document.getElementById("scrim").onclick=closeMenu;
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&document.body.classList.contains("open")){closeMenu();menu.focus();return}
+  if(!(VIEW in BY_SLUG)||e.altKey||e.ctrlKey||e.metaKey||e.target.closest("input,textarea"))return;
+  if(e.key==="ArrowRight"){const a=document.querySelector(".pager a.next");if(a)location.hash=a.getAttribute("href")}
+  if(e.key==="ArrowLeft"){const a=document.querySelector(".pager a.prev");if(a)location.hash=a.getAttribute("href")}
+});
+
+drawList();
+route();
 </script>
