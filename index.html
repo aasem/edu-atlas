@@ -104,6 +104,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 /* Views */
 .view>.eyebrow{margin-bottom:10px}
 .view h1{font-size:clamp(32px,5vw,46px)}
+.go{color:var(--accent)}
+.go a{color:inherit;text-decoration-color:currentColor}
+.bp .bp-routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px}
+.bp .bp-rl{grid-column:1 / -1;margin:0}
 .glance{margin-top:44px;padding-top:28px;border-top:1px solid var(--rule)}
 .glance h2{font-size:30px}
 .view .sub{color:var(--muted);max-width:64ch;margin-block:10px 22px}
@@ -394,13 +398,13 @@ dt .n{color:var(--accent)}
   </div>
 
       <div class="howto">
-        <p><b>How to read the atlas.</b> Each text answers the seven questions in this order, meets its strongest objection, and ends with a reading you can edit (<a href="#readings">Your Readings</a> explains how to keep it). Start from a text in the contents, from a question above, or from <a href="#big">the Big Picture</a>, which opens every question and tradition from one chart. The contents can be arranged by tradition, by any classification or by period; on a phone they open from the Contents button.</p>
+        <p><b>How to read the atlas.</b> Each text answers the seven questions in this order, meets its strongest objection, and ends with a reading you can edit (<a href="#readings">Your Readings</a> explains how to keep it). <span class="go">Start from a text in the contents, from a question above, or from <a href="#big">the Big Picture</a>, which opens every question and tradition from one chart.</span> The contents can be arranged by tradition, by any classification or by period; on a phone they open from the Contents button.</p>
       </div>
     </article>
     <article class="view view-wide" data-view="big" hidden>
       <div class="eyebrow">Begin here</div>
       <h1>The Big Picture</h1>
-      <p class="sub">The seven questions set against the six traditions, with the movement of the whole atlas above them. Every part of the chart opens onto the atlas: choose a cell to read how that tradition answers the question and go on to its texts, choose a question or a tradition to read its page, or follow one of the three routes, which walk through the chart as a story. On a small screen, scroll the chart sideways. <a href="big-picture.png" target="_blank" rel="noopener">Open the chart as an image</a>.</p>
+      <p class="sub">The seven questions set against the six traditions, with the movement of the whole atlas above them. <span class="go">Every part of the chart opens onto the atlas: choose a cell to read how that tradition answers the question and go on to its texts, choose a question or a tradition to read its page, or follow one of the three routes, which walk through the chart as a story.</span> On a small screen, scroll the chart sideways. <a href="big-picture.png" target="_blank" rel="noopener">Open the chart as an image</a>.</p>
       <div class="bp-scroll"><figure class="bp" id="bp" aria-label="The seven questions answered by the six traditions">
         <div class="bp-head">
           <div class="bp-title">Atlas of Educational Philosophy<span>The big picture</span></div>
@@ -420,7 +424,7 @@ dt .n{color:var(--accent)}
       <section class="glance" id="glance">
         <h2>The Texts at a Glance</h2>
 
-  <p class="sub">The chart sums up each tradition; here every text appears on its own. Each tile is one text, placed in its tradition. Colour the tiles by any of the classifications used in the entries: the learner's nature, the motive relied on, where the end comes from, who is educable, who holds authority, or whether a text leans toward formation or transmission. Tap a tile to go to the text.</p>
+  <p class="sub">The chart sums up each tradition; here every text appears on its own. Each tile is one text, placed in its tradition. Colour the tiles by any of the classifications used in the entries: the learner's nature, the motive relied on, where the end comes from, who is educable, who holds authority, or whether a text leans toward formation or transmission. <span class="go">Tap a tile to go to the text.</span></p>
   <div class="map">
     <div class="sorder" role="group" aria-label="Colour the tiles by"><span class="lab">Colour by</span><span id="cOrder" class="frow"></span></div>
     <div id="rows"></div>
@@ -569,7 +573,7 @@ dt .n{color:var(--accent)}
     <article class="view" data-view="readings" hidden>
       <div class="eyebrow">The atlas</div>
       <h1>Your Readings</h1>
-      <p class="sub">Each text ends with a reading under your name. The readings live in the file <code>readings.js</code> in the repository. When you edit one on this page, the change is saved only in this browser. To keep it for good, copy the file here and replace <code>readings.js</code> on GitHub. You can also edit <code>readings.js</code> on GitHub directly.</p>
+      <p class="sub">Each text ends with a reading under your name. The readings live in the file <code>readings.js</code> in the repository. When you edit one on this page, the change is saved only in this browser. <span class="go">To keep it for good, copy the file here and replace <code>readings.js</code> on GitHub.</span> You can also edit <code>readings.js</code> on GitHub directly.</p>
       <div class="rform" id="rbox"></div>
     </article>
     <article class="view" data-view="about" hidden>
@@ -1407,7 +1411,7 @@ function mineHTML(n){
   const paras=t.trim()?t.trim().split(/\n\s*\n/).map(p=>`<p>${esc(p)}</p>`).join(""):"<p>No reading yet.</p>";
   return `<div class="mine"><div class="hd"><b>${esc(poss(NAME))}</b>${isLocal(n)?`<span class="local">edited on this device</span>`:""}</div>
     <div class="txt${t.trim()?"":" empty"}">${paras}</div>
-    <div class="btns"><button class="btn" data-act="edit">Edit</button>${isLocal(n)?`<button class="btn" data-act="revert">Revert to file</button><span class="hint">Saved in this browser only. <a href="#readings">Copy readings.js</a> to keep it.</span>`:""}</div></div>`;
+    <div class="btns"><button class="btn" data-act="edit">Edit</button>${isLocal(n)?`<button class="btn" data-act="revert">Revert to file</button><span class="hint go">Saved in this browser only. <a href="#readings">Copy readings.js</a> to keep it.</span>`:""}</div></div>`;
 }
 function wireMine(n){
   const box=document.getElementById("mine");
