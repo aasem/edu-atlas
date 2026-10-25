@@ -5,6 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Noto+Serif+SC&family=Noto+Serif+Devanagari&family=Noto+Serif+Hebrew&display=swap">
+<script>try{const t=localStorage.getItem("eduTheme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(_){}</script>
 <style>
 /* Layout: a library reader — a contents pane on the left lists every text and essay; the reading pane shows one at a time. */
 :root{
@@ -55,6 +56,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:300px minmax(0,1fr);gap:0 56px}
 .side{position:sticky;top:var(--top);height:calc(100dvh - var(--top));overflow-y:auto;overscroll-behavior:contain;padding-block:28px 40px;padding-right:18px;border-right:1px solid var(--rule);display:grid;align-content:start;gap:22px}
 .brand{font:400 25px/1.15 var(--display);text-decoration:none;color:var(--fg)}
+.bhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.theme{flex:none;display:inline-flex;align-items:center;gap:6px;font:500 12px var(--mono);padding:5px 9px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);color:var(--fg);cursor:pointer}
+.theme svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6}
+.theme:hover{border-color:var(--accent);color:var(--accent)}
 .brand:hover{color:var(--accent)}
 .sgroup{display:grid;gap:2px}
 .sgroup>.lab{margin-bottom:6px}
@@ -79,7 +84,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .gh:first-child{margin-top:4px}
 .nohit{font-size:14px;color:var(--muted);font-style:italic}
 
-.main{min-width:0;padding-block:36px 72px}
+.main{min-width:0;padding-block:20px 72px}
+.mainbar{display:flex;justify-content:flex-end;margin-bottom:12px}
 .view{max-width:760px}
 .topbar{display:none}
 .scrim{display:none}
@@ -177,7 +183,9 @@ dd.tr{font-size:14px;color:var(--muted)}
   .shell{grid-template-columns:minmax(0,1fr)}
   .topbar{display:flex;align-items:center;gap:12px;position:sticky;top:var(--top);z-index:20;background:var(--bg);border-bottom:1px solid var(--rule);padding-block:10px;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px))) calc(-1 * max(16px,env(safe-area-inset-right,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .topbar button{font:500 12.5px var(--mono);padding:6px 12px;border:1px solid var(--rule);border-radius:4px;background:var(--surface);color:var(--fg);cursor:pointer;flex:none}
-  .topbar .where{min-width:0;font:400 17px/1.2 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .theme{margin-left:auto}
+  .mainbar{display:none}
+  .topbar .where{min-width:0;flex:1 1 auto;font:400 17px/1.2 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .side{position:fixed;z-index:40;top:0;left:0;bottom:0;height:auto;width:min(340px,88vw);background:var(--bg);border-right:1px solid var(--rule);padding-top:calc(var(--top) + 20px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 32px);transform:translateX(-105%);transition:transform .22s ease;visibility:hidden}
   body.open .side{transform:none;visibility:visible}
   body.open .scrim{display:block;position:fixed;inset:0;z-index:35;background:var(--scrim)}
@@ -192,7 +200,7 @@ dd.tr{font-size:14px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.side{transition:none}}
 </style>
 
-<div class="topbar"><button type="button" id="menu" aria-controls="side" aria-expanded="false">Contents</button><span class="where" id="where"></span></div>
+<div class="topbar"><button type="button" id="menu" aria-controls="side" aria-expanded="false">Contents</button><span class="where" id="where"></span><button type="button" class="theme" data-theme-toggle></button></div>
 <div class="shell">
   <nav class="side" id="side" aria-label="Contents">
     <a class="brand" href="#question">Atlas of Educational Philosophy</a>
@@ -224,6 +232,7 @@ dd.tr{font-size:14px;color:var(--muted)}
   </nav>
   <div class="scrim" id="scrim"></div>
   <main class="main" id="main">
+    <div class="mainbar"><button type="button" class="theme" data-theme-toggle></button></div>
     <article class="view" data-view="question" hidden>
       <header class="hero">
   <div class="eyebrow">Six traditions · fifty-four texts · each read through five questions</div>
@@ -1185,6 +1194,16 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowRight"){const a=document.querySelector(".pager a.next");if(a)location.hash=a.getAttribute("href")}
   if(e.key==="ArrowLeft"){const a=document.querySelector(".pager a.prev");if(a)location.hash=a.getAttribute("href")}
 });
+
+/* Theme */
+const MOON='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.8A5.8 5.8 0 0 1 6.2 2.5a5.8 5.8 0 1 0 7.3 7.3z"/></svg>';
+const SUN='<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M3 13l1.1-1.1M11.9 4.1 13 3"/></svg>';
+const sysDark=matchMedia("(prefers-color-scheme: dark)");
+const isDark=()=>{const t=document.documentElement.getAttribute("data-theme");return t?t==="dark":sysDark.matches};
+function drawTheme(){const d=isDark();document.querySelectorAll("[data-theme-toggle]").forEach(b=>{b.innerHTML=(d?SUN:MOON)+`<span>${d?"Light":"Dark"}</span>`;b.setAttribute("aria-label",d?"Switch to light theme":"Switch to dark theme");b.title=b.getAttribute("aria-label")})}
+document.querySelectorAll("[data-theme-toggle]").forEach(b=>b.onclick=()=>{const t=isDark()?"light":"dark";document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("eduTheme",t)}catch(_){};drawTheme()});
+sysDark.addEventListener?.("change",drawTheme);
+drawTheme();
 
 drawList();
 route();
