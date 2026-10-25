@@ -136,4 +136,16 @@ window.READINGS = {
   "Sartre, Existentialism Is a Humanism": `The logical end of the split between nature and purpose: no nature, so no end except the one each person chooses. The student he refused to advise is the strongest case in the atlas against the teacher's authority, and Murdoch's reply is the strongest case for education as training in attention.`,
 
   "Schultz and Becker, Human Capital": `The economists did not invent the reversal, but they gave it a unit of measurement. Spence's signalling model describes better than the theory itself what a degree often does now, and it explains how a credential can come to stand in for the learning it was meant to certify.`,
+
+  "Wollstonecraft, A Vindication of the Rights of Woman": `The answer to Book V of Emile, and still the clearest statement that what passes for a nature is often an education. Her schools separate the classes at nine, which shows how much easier it was to see one exclusion than all of them.`,
+
+  "Ambedkar, Annihilation of Caste": `A division of labourers, not of labour: the single most useful phrase in the atlas for the question of work. His quarrel with Gandhi shows that a philosophy of the hand can become a philosophy of the hereditary hand.`,
+
+  "Gandhi, Basic Education (Nai Talim)": `The boldest modern attempt to put the hand at the centre of the school, and the clearest refusal of human capital before the term existed. Ambedkar's objection belongs beside it: a craft chosen by the village can become a craft assigned by birth.`,
+
+  "Washington, Up from Slavery": `Easy to dismiss and hard to answer. A people with nothing needed a living first, and Tuskegee gave it one. What he gave up for it, as Du Bois saw, was the question of who decides what the learner is for.`,
+
+  "Du Bois, The Souls of Black Folk": `The best modern defence of the claim that education must aim beyond bread-winning. That he later criticized his own talented tenth is to his credit, and it shows how hard it is to defend high culture without grading people.`,
+
+  "Dreyfus, What Computers Can't Do": `His predictions aged badly and his account of skill did not. If machines take over transmission, involvement and risk, the things he said online learning removes, are what a school must still supply.`,
 };
