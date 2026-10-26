@@ -298,6 +298,12 @@ dt .n{color:var(--accent)}
 .bp-nav a.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
 @media (max-width:900px){.bp-panel li{grid-template-columns:minmax(0,1fr);gap:2px}}
 
+/* The Big Picture uses the whole width of the window */
+body.wide .shell{max-width:none}
+body.wide .main{padding-right:8px}
+@media (min-width:901px){body.wide .shell{grid-template-columns:250px minmax(0,1fr);gap:0 32px}}
+body.wide .bp-scroll{margin-right:0}
+
 /* Narrow screens: contents become a drawer */
 @media (max-width:900px){
   .shell{grid-template-columns:minmax(0,1fr)}
@@ -1305,7 +1311,7 @@ const TERMS=[["Śaṅkara", "https://en.wikipedia.org/wiki/Adi_Shankara"], ["Rā
 const TRE=new RegExp("(^|[^\\p{L}])("+TERMS.map(t=>t[0].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}])","u");
 function linkify(root){
   const seen=new Set();
-  const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest("a,button,textarea,input,label,.mine,h1,h2,h3,h4,.eyebrow,.lab,.chip,.toc,.tr")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest("a,button,textarea,input,label,.mine,h1,h2,h3,h4,.eyebrow,.lab,.chip,.toc,.tr,.tag")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
   const nodes=[];while(walk.nextNode())nodes.push(walk.currentNode);
   nodes.forEach(node=>{
     let txt=node.nodeValue,frag=null,guard=0;
@@ -1370,7 +1376,7 @@ function drawList(){
 let VIEW="question";
 function markCurrent(scroll){
   let cur_=null;
-  document.querySelectorAll(".side a.it").forEach(a=>{const on=a.getAttribute("href")==="#"+VIEW;if(on){a.setAttribute("aria-current","page");cur_=a}else a.removeAttribute("aria-current")});
+  document.querySelectorAll(".side a.it").forEach(a=>{const on=a.getAttribute("href")==="#"+VIEW;if(on&&!cur_){a.setAttribute("aria-current","page");cur_=a}else a.removeAttribute("aria-current")});
   if(scroll&&cur_){const s=document.getElementById("side");const r=cur_.getBoundingClientRect(),sr=s.getBoundingClientRect();if(r.top<sr.top+60||r.bottom>sr.bottom-20)cur_.scrollIntoView({block:"center"})}
 }
 function textView(d){
@@ -1432,6 +1438,7 @@ function show(id,{scroll=true}={}){
   if(/^(cell|route)-/.test(id)||id==="glance"){sub=id;id="big"}
   if(!(id in BY_SLUG)&&!document.querySelector(`.view[data-view="${CSS.escape(id)}"]`))id="question";
   VIEW=id;editing=false;
+  document.body.classList.toggle("wide",id==="big");
   document.querySelectorAll(".view").forEach(v=>v.hidden=true);
   let title;
   if(id in BY_SLUG){
